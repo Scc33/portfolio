@@ -1,4 +1,4 @@
-import { BlogPosts } from 'app/components/posts'
+import { PortfolioPieces } from 'app/components/posts'
 
 export default function Page() {
   return (
@@ -7,7 +7,7 @@ export default function Page() {
         My Portfolio
       </h1>
       <div className="my-8">
-        <BlogPosts />
+        <PortfolioPieces />
       </div>
     </section>
   )
