@@ -5,10 +5,7 @@ const HOME = 'Home';
 const navItems = {
   '/': {
     name: HOME,
-  },
-  'https://blog.seancoughlin.me': {
-    name: 'Blog',
-  },
+  }
 }
 
 export function Navbar() {
