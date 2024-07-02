@@ -1,4 +1,4 @@
-import { PortfolioPieces } from 'app/components/posts'
+import { PortfolioPieces } from 'app/components/PortfolioPieces'
 
 export default function Page() {
   return (
