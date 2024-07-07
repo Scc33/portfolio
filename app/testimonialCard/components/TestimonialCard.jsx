@@ -17,8 +17,8 @@ const TestimonialCard = () => {
         </div>
       </div>
       <p className="text-base text-neutral-700">
-        I've been searching for high-quality abstract images for my design
-        projects, and I'm thrilled to have found this platform. The variety and
+        I&apos;ve been searching for high-quality abstract images for my design
+        projects, and I&apos;m thrilled to have found this platform. The variety and
         depth of creativity are astounding!
       </p>
     </div>

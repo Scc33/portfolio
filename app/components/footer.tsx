@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const navItems = {
   "https://github.com/Scc33": {
     name: "GitHub",
@@ -37,7 +39,7 @@ export default function Footer() {
         {Object.entries(navItems).map(([path, { name }]) => {
           return (
             <li key={path}>
-              <a
+              <Link
                 className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -45,7 +47,7 @@ export default function Footer() {
               >
                 <ArrowIcon />
                 <p className="ml-2 h-7">{name}</p>
-              </a>
+              </Link>
             </li>
           );
         })}
