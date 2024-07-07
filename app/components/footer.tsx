@@ -13,6 +13,9 @@ const navItems = {
   "https://seancoughlin.me": {
     name: "Website",
   },
+  "https://portfolio.seancoughlin.me/sitemap.xml": {
+    name: "Sitemap",
+  },
 };
 
 function ArrowIcon() {
