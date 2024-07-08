@@ -11,9 +11,10 @@ const CollectionCard = ({ collection, variant = "secondary" }) => {
       group relative overflow-hidden rounded-lg
       ${
         variant === "primary"
-          ? "col-span-2 row-span-2 aspect-square md:aspect-[4/3] lg:aspect-square"
-          : "col-span-2 md:col-span-1 aspect-[4/3]"
+          ? "col-span-full md:col-span-2 md:row-span-2 aspect-[4/3] md:aspect-square"
+          : "col-span-full md:col-span-1 aspect-[4/3]"
       }
+      w-full h-full
     `}
     >
       <Image
