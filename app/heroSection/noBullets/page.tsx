@@ -11,7 +11,7 @@ export default function Page() {
       <h1 className="font-semibold text-2xl mb-8 tracking-tighter">
         Hero Section
       </h1>
-      <HeroSection isVisible={true} />
+      <HeroSection isVisible={false} />
     </section>
   );
 }
