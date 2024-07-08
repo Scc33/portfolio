@@ -1,4 +1,5 @@
 import { PortfolioPieces } from 'app/components/PortfolioPieces'
+import { PAGE_METADATA } from './data/Pages'
 
 export default function Page() {
   return (
@@ -7,7 +8,7 @@ export default function Page() {
         My Portfolio
       </h1>
       <div className="my-8">
-        <PortfolioPieces />
+        <PortfolioPieces pages={PAGE_METADATA}/>
       </div>
     </section>
   )
