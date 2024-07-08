@@ -16,4 +16,5 @@ export const PAGE_METADATA: PageMetadata[] = [
   { endpoint: "/featuresGrid", date: "7/9/2024", name: "Features Grid" },
   { endpoint: "/heroSection/bullets", date: "7/10/2024", name: "Hero Section with Bullets" },
   { endpoint: "/heroSection/noBullets", date: "7/10/2024", name: "Hero Section without Bullets" },
+  { endpoint: "/notificationSettings", date: "7/10/2024", name: "Notification Settings" },
 ];
