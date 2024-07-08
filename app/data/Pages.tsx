@@ -14,4 +14,6 @@ export const PAGE_METADATA: PageMetadata[] = [
   { endpoint: "/collections", date: "7/7/2024", name: "Collections" },
   { endpoint: "/badge", date: "7/8/2024", name: "Badge" },
   { endpoint: "/featuresGrid", date: "7/9/2024", name: "Features Grid" },
+  { endpoint: "/heroSection/bullets", date: "7/10/2024", name: "Hero Section with Bullets" },
+  { endpoint: "/heroSection/noBullets", date: "7/10/2024", name: "Hero Section without Bullets" },
 ];
