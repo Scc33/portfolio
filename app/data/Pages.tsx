@@ -12,4 +12,5 @@ export const PAGE_METADATA: PageMetadata[] = [
   { endpoint: "/textInput", date: "7/5/2024", name: "Text Input" },
   { endpoint: "/fetch", date: "7/6/2024", name: "Fetch" },
   { endpoint: "/collections", date: "7/7/2024", name: "Collections" },
+  { endpoint: "/badge", date: "7/8/2024", name: "Badge" },
 ];
