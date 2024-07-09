@@ -1,0 +1,16 @@
+{
+    "version": "0.2",
+    "language": "en",
+    "files": [
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.md",
+        "**/*.json",
+        "**/*.html",
+        "**/*.scss"
+    ],
+    "ignorePaths": ["node_modules/**", ".next/**", "out/**", "public/**"],
+    "words": ["Nextjs", "cspell", "eslint", "prettier", "Coughlin"]
+}

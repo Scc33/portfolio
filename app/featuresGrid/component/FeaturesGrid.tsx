@@ -54,7 +54,7 @@ const FeaturesGrid = () => {
                             <Copyright className="w-6 h-6 text-blue-600" />
                         </div>
                         <h3 className="mb-2 text-xl font-semibold text-gray-900">
-                            All Are Under licensed
+                            All Are Under License
                         </h3>
                         <p className="text-gray-600">
                             The only limitation with these abstract images is

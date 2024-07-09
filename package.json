@@ -5,7 +5,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "prettier --write app"
+    "prettier": "prettier --write app",
+    "cspell": "cspell **/*"
   },
   "dependencies": {
     "@tailwindcss/postcss": "4.0.0-alpha.13",
