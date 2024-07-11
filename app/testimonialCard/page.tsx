@@ -1,4 +1,4 @@
-import TestimonialCard from "./components/TestimonialCard";
+import TestimonialCard from "../components/TestimonialCard/TestimonialCard";
 
 export const metadata = {
     title: "Testimonial Card",
