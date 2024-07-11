@@ -35,4 +35,5 @@ export const PAGE_METADATA: PageMetadata[] = [
     },
     { endpoint: "/mortgageCalc", date: "7/10/2024", name: "Mortgage Calculator" },
     { endpoint: "/statisticsSection", date: "7/11/2024", name: "Statistics Section" },
+    { endpoint: "/notFound", date: "7/12/2024", name: "Not Found" },
 ];
