@@ -1,4 +1,4 @@
-import PortfolioCard from "./components/PortfolioCard";
+import PortfolioCard from "../components/PortfolioCard/PortfolioCard";
 
 export const metadata = {
     title: "Portfolio Card",
