@@ -3,7 +3,7 @@ import Link from "next/link";
 const HOME = "Home";
 
 const navItems = {
-    "/": {
+    "/snippets": {
         name: HOME
     }
 };

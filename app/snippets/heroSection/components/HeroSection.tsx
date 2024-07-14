@@ -1,4 +1,4 @@
-import { Button } from "app/button/components/Button";
+import { Button } from "app/snippets/button/components/Button";
 import { Check } from "lucide-react";
 import Image from "next/image";
 
@@ -59,7 +59,7 @@ const HeroSection = ({ isVisible }: HeroSectionProps) => {
                 </div>
                 <div className="order-2 md:order-2">
                     <Image
-                        src="/heroSection/prism.png"
+                        src="/snippets/heroSection/prism.png"
                         width={1000}
                         height={600}
                         alt="Hero Image"

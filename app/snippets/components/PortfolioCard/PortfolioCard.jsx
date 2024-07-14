@@ -6,7 +6,7 @@ export const PortfolioCard = () => {
         <div className="bg-white rounded-lg shadow-lg p-6 max-w-[343px] md:max-w-[384px] lg:max-w-[384px] mx-auto">
             <div className="flex flex-col items-center">
                 <Image
-                    src="/portfolioCard/profile.png"
+                    src="/snippets/portfolioCard/profile.png"
                     alt="Sarah Dole"
                     width={96}
                     height={96}

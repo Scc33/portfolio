@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import BlogCard from "app/components/BlogCard/BlogCard";
+import BlogCard from "app/snippets/components/BlogCard/BlogCard";
 
 const meta = {
     title: "Portfolio/Blog Card",

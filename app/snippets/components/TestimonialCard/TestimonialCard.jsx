@@ -5,7 +5,7 @@ const TestimonialCard = () => {
         <div className="bg-white rounded-lg shadow-md p-6 md:p-8 max-w-md mx-auto">
             <div className="flex items-center mb-4">
                 <Image
-                    src="/testimonialCard/profile-thumbnail.png"
+                    src="/snippets/testimonialCard/profile-thumbnail.png"
                     alt="Sarah Dole"
                     width={48}
                     height={48}

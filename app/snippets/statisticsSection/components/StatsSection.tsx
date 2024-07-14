@@ -50,7 +50,7 @@ const StatsSection: React.FC = () => {
                 <div className="flex flex-col md:flex-row gap-8 md:gap-12">
                     <div className="flex md:w-1/2">
                         <Image
-                            src="/statisticsSection/white-blocks.png"
+                            src="/snippets/statisticsSection/white-blocks.png"
                             alt="Abstract geometric shapes"
                             width={600}
                             height={400}

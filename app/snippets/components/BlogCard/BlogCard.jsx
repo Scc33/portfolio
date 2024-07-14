@@ -7,7 +7,7 @@ const BlogCard = () => {
         <div className="max-w-sm sm:max-w-md lg:max-w-lg mx-auto bg-white rounded-2xl overflow-hidden shadow-lg">
             <div className="relative h-48 sm:h-64 lg:h-80">
                 <Image
-                    src="/blogCard/roomImage.jpg"
+                    src="/snippets/blogCard/roomImage.jpg"
                     alt="Living room interior"
                     layout="fill"
                     objectFit="cover"

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import PortfolioCard from "app/components/PortfolioCard/PortfolioCard";
+import PortfolioCard from "app/snippets/components/PortfolioCard/PortfolioCard";
 
 const meta = {
     title: "Portfolio/Portfolio Card",

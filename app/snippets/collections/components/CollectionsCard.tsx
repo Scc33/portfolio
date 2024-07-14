@@ -6,7 +6,7 @@ const CollectionCard = ({ collection, variant = "secondary" }) => {
 
     return (
         <Link
-            href={`/collections/${collection_id}`}
+            href={`/snippets/collections/${collection_id}`}
             className={`
       group relative overflow-hidden rounded-lg
       ${
