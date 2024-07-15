@@ -87,7 +87,7 @@ export default function Page() {
                         <div className="relative md:max-w-xl">
                             <Image
                                 className="absolute w-40 lg-w-52 left-56 -top-20 select-none hidden sm:block lg:hidden xl:block"
-                                src="/ecommerce/phone-case.png"
+                                src="/ecommerce/your-image.png"
                                 alt="Phone Case Image"
                                 width={160}
                                 height={160}
@@ -99,7 +99,10 @@ export default function Page() {
                                 width={160}
                                 height={160}
                             />
-                            <Phone />
+                            <Phone
+                                className="w-64"
+                                imgSrc="/ecommerce/testimonials/1.jpg"
+                            />
                         </div>
                     </div>
                 </MaxWidthWrapper>

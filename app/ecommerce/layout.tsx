@@ -1,7 +1,7 @@
 import { Recursive } from 'next/font/google'
+import Navbar from './components/Navbar'
 
 const recursive = Recursive({ subsets: ['latin'] })
-
 
 export default function RootLayout({
   children,
@@ -10,6 +10,7 @@ export default function RootLayout({
 }>) {
   return (
       <div className={recursive.className}>
+        <Navbar />
         {children}
       </div>
   )
