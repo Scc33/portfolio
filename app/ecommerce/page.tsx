@@ -1,6 +1,7 @@
 import Image from "next/image";
 import MaxWidthWrapper from "./components/MaxWidthWrapper";
-import { Check } from "lucide-react";
+import { Check, Star } from "lucide-react";
+import Phone from "./components/Phone";
 
 export default function Page() {
     return (
@@ -50,6 +51,55 @@ export default function Page() {
                                     </li>
                                 </div>
                             </ul>
+                            <div className="mt-12 flex flex-col sm:flex-row items-center sm:items-start gap-5">
+                                <div className="flex -space-x-4">
+                                    {[1, 2, 3, 4, 5].map((number) => (
+                                        <Image
+                                            key={number}
+                                            className="inline-block object-cover h-10 w-10 rounded-full ring-2 ring-slate-100"
+                                            src={`/ecommerce/users/user-${number}.png`}
+                                            alt="User image"
+                                            height={40}
+                                            width={40}
+                                        />
+                                    ))}
+                                </div>
+                                <div className="flex flex-col justify-between items-center sm:items-start">
+                                    <div className="flex gap-0.5">
+                                        {[1, 2, 3, 4, 5].map((number) => (
+                                            <Star
+                                                key={number}
+                                                className="h-4 w-4 text-green-600 fill-green-600"
+                                            />
+                                        ))}
+                                    </div>
+                                    <p>
+                                        <span className="font-semibold">
+                                            1,250
+                                        </span>{" "}
+                                        happy customers
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-span-full lg:col-span-1 w-full flex justify-center px-8 sm:px-16 md:px-0 mt-32 lg:mx-0 lg:mt-20 h-fit">
+                        <div className="relative md:max-w-xl">
+                            <Image
+                                className="absolute w-40 lg-w-52 left-56 -top-20 select-none hidden sm:block lg:hidden xl:block"
+                                src="/ecommerce/phone-case.png"
+                                alt="Phone Case Image"
+                                width={160}
+                                height={160}
+                            />
+                            <Image
+                                className="absolute w-20 -left-6 -bottom-6 select-none"
+                                src="/ecommerce/line.png"
+                                alt="Phone Case Image"
+                                width={160}
+                                height={160}
+                            />
+                            <Phone />
                         </div>
                     </div>
                 </MaxWidthWrapper>
