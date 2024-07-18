@@ -1,6 +1,9 @@
 import Link from "next/link";
 
 const navItems = {
+    "/": {
+        name: "Home"
+    },
     "https://github.com/Scc33": {
         name: "GitHub"
     },
