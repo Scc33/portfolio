@@ -244,7 +244,7 @@ export default function Page() {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-auto flex-col gap-4 lg:pl-8 xl:pr-20">
+                        <div className="flex flex-auto flex-col gap-4 lg:pl-8 xl:pl-20">
                             <div className="flex gap-0.5 mb-2">
                                 {[1, 2, 3, 4, 5].map((number) => (
                                     <Star
