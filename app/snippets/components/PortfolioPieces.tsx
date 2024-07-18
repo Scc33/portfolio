@@ -1,10 +1,10 @@
-import { PageMetadata } from "app/data/Pages";
+import { PAGE_METADATA, PageMetadata } from "../../data/Pages";
 import Link from "next/link";
 
-export function PortfolioPieces({ pages }) {
+export function PortfolioPieces() {
     return (
         <div>
-            {pages.map((page: PageMetadata) => (
+            {PAGE_METADATA.map((page: PageMetadata) => (
                 <Link
                     className="flex flex-col space-y-1 mb-4"
                     href={page.endpoint}

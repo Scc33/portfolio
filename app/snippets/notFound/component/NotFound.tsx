@@ -1,4 +1,4 @@
-import { Button } from "app/snippets/button/components/Button";
+import { Button } from "../../button/components/Button";
 import Link from "next/link";
 
 const NotFound = () => {

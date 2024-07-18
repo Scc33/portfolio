@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Collection } from "../data/CollectionsData";
 
-const CollectionCard = ({ collection, variant = "secondary" }) => {
+const CollectionCard = ({ collection, variant = "secondary" }: { collection: Collection, variant: string }) => {
     const { name, description, image_url, collection_id } = collection;
 
     return (
