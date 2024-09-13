@@ -5,6 +5,15 @@ import Project from "./Project";
 
 export const projectsData = [
   {
+    title: "Snake Game",
+    description:
+      "A classic Snake game built with React, featuring a scoring system and responsive design.",
+    tags: ["React", "TypeScript", "CSS"],
+    imageUrl: "",
+    link: "/snake",
+    date: "Fall 2024"
+  },
+  {
     title: "Phone Case E-commerce",
     description:
       "A full-stack app for creating and ordering custom phone cases.",
