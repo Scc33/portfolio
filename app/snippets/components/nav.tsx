@@ -1,14 +1,15 @@
 import Link from "next/link";
 
-const HOME = "Home";
-
-const navItems = {
-    "/snippets": {
-        name: HOME
-    }
+const defaultNavItems = {
+    "/": "All projects",
+    "/snippets": "Home"
 };
 
-export function Navbar() {
+interface NavbarProps {
+    navItems?: Record<string, string>;
+}
+
+export function Navbar({ navItems = defaultNavItems }: NavbarProps) {
     return (
         <aside className="-ml-[8px] mb-16 tracking-tight">
             <div className="lg:sticky lg:top-20">
@@ -17,12 +18,12 @@ export function Navbar() {
                     id="nav"
                 >
                     <div className="flex flex-row space-x-0 pr-10">
-                        {Object.entries(navItems).map(([path, { name }]) => {
+                        {Object.entries(navItems).map(([path, name]) => {
                             return (
                                 <Link
                                     key={path}
                                     href={path}
-                                    target={name !== HOME ? "_blank" : "_self"}
+                                    target="_self"
                                     className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative py-1 px-2"
                                 >
                                     {name}

@@ -1,7 +1,10 @@
 import Footer from "../components/Footer";
 import { Navbar } from "../snippets/components/nav";
 
-
+const navItems = {
+    "/": "All projects",
+    "/snake": "Snake Game"
+};
 
 export default function RootLayout({
     children
@@ -15,7 +18,7 @@ export default function RootLayout({
         >
             <div className="antialiased max-w-3xl md:mx-auto">
                 <main className="flex-auto min-w-0 flex flex-col px-2 pt-8 md:px-0 mx-4 sm:mx-0">
-                    <Navbar />
+                    <Navbar navItems={navItems}/>
                     {children}
                     <Footer />
                 </main>

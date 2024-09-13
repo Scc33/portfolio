@@ -9,7 +9,7 @@ export const projectsData = [
     description:
       "A classic Snake game built with React, featuring a scoring system and responsive design.",
     tags: ["React", "TypeScript", "CSS"],
-    imageUrl: "",
+    imageUrl: "/snake/snake-screenshot.png",
     link: "/snake",
     date: "Fall 2024"
   },
