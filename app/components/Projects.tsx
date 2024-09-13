@@ -35,7 +35,7 @@ export const projectsData = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="scroll-mt-28 mb-24">
+    <section id="projects" className="scroll-mt-28 mb-24 flex justify-center">
       <div>
         {projectsData.map((project, index) => (
           <Fragment key={index}>
