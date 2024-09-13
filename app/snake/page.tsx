@@ -1,24 +1,27 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Navbar } from "../snippets/components/nav";
-import Footer from "../components/Footer";
 
-export default function SnakeGame() {
+type Direction = { x: number; y: number };
+type Coordinate = { x: number; y: number };
+
+export default function SnakeGame(): JSX.Element {
     const gridSize = 30;
-    const [gameState, setGameState] = useState("idle"); // 'idle', 'running', 'over'
-    const [direction, setDirection] = useState({ x: 0, y: 0 });
-    const [snake, setSnake] = useState([]);
-    const [food, setFood] = useState(null);
+    const [gameState, setGameState] = useState<"idle" | "running" | "over">(
+        "idle"
+    );
+    const [direction, setDirection] = useState<Direction>({ x: 0, y: 0 });
+    const [snake, setSnake] = useState<Coordinate[]>([]);
+    const [food, setFood] = useState<Coordinate | null>(null);
 
-    function startGame() {
+    function startGame(): void {
         setGameState("running");
         // Initialize the snake in the center
-        const initialSnake = [
+        const initialSnake: Coordinate[] = [
             { x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2) }
         ];
         setSnake(initialSnake);
         // Random initial direction (up, left, or down)
-        const directions = [
+        const directions: Direction[] = [
             { x: 0, y: -1 }, // Up
             { x: -1, y: 0 }, // Left
             { x: 0, y: 1 }, // Down
@@ -31,8 +34,8 @@ export default function SnakeGame() {
         placeFood(initialSnake);
     }
 
-    function placeFood(snake) {
-        let newFood;
+    function placeFood(snake: Coordinate[]): void {
+        let newFood: Coordinate;
         while (true) {
             newFood = {
                 x: Math.floor(Math.random() * gridSize),
@@ -51,8 +54,8 @@ export default function SnakeGame() {
         setFood(newFood);
     }
 
-    function moveSnake() {
-        const newHead = {
+    function moveSnake(): void {
+        const newHead: Coordinate = {
             x: snake[0].x + direction.x,
             y: snake[0].y + direction.y
         };
@@ -81,7 +84,7 @@ export default function SnakeGame() {
         let newSnake = [newHead, ...snake];
 
         // Check if food is eaten
-        if (newHead.x === food.x && newHead.y === food.y) {
+        if (food && newHead.x === food.x && newHead.y === food.y) {
             placeFood(newSnake);
         } else {
             newSnake.pop();
@@ -100,7 +103,7 @@ export default function SnakeGame() {
     }, [gameState, snake, direction]);
 
     useEffect(() => {
-        function handleKeyDown(event) {
+        function handleKeyDown(event: KeyboardEvent): void {
             if (event.code === "Space") {
                 if (gameState !== "running") {
                     startGame();
