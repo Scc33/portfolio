@@ -5,6 +5,15 @@ import Project from "./Project";
 
 export const projectsData = [
   {
+    title: "2048 Game",
+    description:
+      "A clone of the popular 2048 game built with React and TypeScript.",
+    tags: ["React", "TypeScript", "CSS"],
+    imageUrl: "/2048/2048-screenshot.png",
+    link: "/2048",
+    date: "Fall 2024"
+  },
+  {
     title: "Snake Game",
     description:
       "A classic Snake game built with React, featuring a scoring system and responsive design.",
