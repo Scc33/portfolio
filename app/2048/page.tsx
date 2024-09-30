@@ -1,17 +1,24 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, CSSProperties } from 'react';
 
 const TILE_COUNT = 4;
 
-const createEmptyBoard = () => {
+type BoardType = number[][];
+
+interface Position {
+  row: number;
+  col: number;
+}
+
+const createEmptyBoard = (): BoardType => {
   return Array.from({ length: TILE_COUNT }, () => Array(TILE_COUNT).fill(0));
 };
 
-const getRandomTileValue = () => (Math.random() < 0.9 ? 2 : 4);
+const getRandomTileValue = (): number => (Math.random() < 0.9 ? 2 : 4);
 
-const getEmptyPositions = (board) => {
-  const emptyPositions = [];
+const getEmptyPositions = (board: BoardType): Position[] => {
+  const emptyPositions: Position[] = [];
   board.forEach((row, rowIndex) =>
     row.forEach((value, colIndex) => {
       if (value === 0) emptyPositions.push({ row: rowIndex, col: colIndex });
@@ -20,15 +27,22 @@ const getEmptyPositions = (board) => {
   return emptyPositions;
 };
 
-const addRandomTile = (board) => {
+const addRandomTile = (board: BoardType): BoardType => {
   const emptyPositions = getEmptyPositions(board);
   if (emptyPositions.length === 0) return board;
   const { row, col } = emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
-  board[row][col] = getRandomTileValue();
-  return board;
+  const newBoard = board.map((rowArr, rowIndex) =>
+    rowArr.map((value, colIndex) => {
+      if (rowIndex === row && colIndex === col) {
+        return getRandomTileValue();
+      }
+      return value;
+    })
+  );
+  return newBoard;
 };
 
-const canMove = (board) => {
+const canMove = (board: BoardType): boolean => {
   for (let row = 0; row < TILE_COUNT; row++) {
     for (let col = 0; col < TILE_COUNT; col++) {
       if (board[row][col] === 0) return true;
@@ -39,17 +53,17 @@ const canMove = (board) => {
   return false;
 };
 
-const transpose = (board) => {
+const transpose = (board: BoardType): BoardType => {
   return board[0].map((_, colIndex) => board.map((row) => row[colIndex]));
 };
 
-const reverseRows = (board) => {
-  return board.map((row) => row.reverse());
+const reverseRows = (board: BoardType): BoardType => {
+  return board.map((row) => [...row].reverse());
 };
 
-const mergeRow = (row, setScore) => {
+const mergeRow = (row: number[], setScore: React.Dispatch<React.SetStateAction<number>>): number[] => {
   const nonZeroTiles = row.filter((val) => val !== 0);
-  const mergedRow = [];
+  const mergedRow: number[] = [];
   let skip = false;
   for (let i = 0; i < nonZeroTiles.length; i++) {
     if (skip) {
@@ -71,12 +85,12 @@ const mergeRow = (row, setScore) => {
   return mergedRow;
 };
 
-const Game2048 = () => {
-  const [board, setBoard] = useState(createEmptyBoard());
-  const [score, setScore] = useState(0);
-  const [gameOver, setGameOver] = useState(false);
+const Game2048: React.FC = () => {
+  const [board, setBoard] = useState<BoardType>(createEmptyBoard());
+  const [score, setScore] = useState<number>(0);
+  const [gameOver, setGameOver] = useState<boolean>(false);
 
-  const initializeGame = () => {
+  const initializeGame = (): void => {
     let newBoard = createEmptyBoard();
     newBoard = addRandomTile(newBoard);
     newBoard = addRandomTile(newBoard);
@@ -85,12 +99,12 @@ const Game2048 = () => {
     setGameOver(false);
   };
 
-  const handleMove = (direction) => {
+  const handleMove = (direction: string): void => {
     if (gameOver) return;
-    let rotatedBoard;
+    let rotatedBoard: BoardType = board;
     let moved = false;
 
-    const move = (b) => {
+    const move = (b: BoardType): BoardType => {
       return b.map((row) => mergeRow(row, setScore));
     };
 
@@ -133,7 +147,7 @@ const Game2048 = () => {
   };
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    const handleKeyDown = (event: KeyboardEvent): void => {
       if (event.key === ' ' || event.code === 'Space') {
         initializeGame();
       } else if (['ArrowUp', 'w', 'W'].includes(event.key)) {
@@ -164,7 +178,10 @@ const Game2048 = () => {
         {board.map((row, rowIndex) => (
           <div key={rowIndex} style={styles.row}>
             {row.map((value, colIndex) => (
-              <div key={colIndex} style={{ ...styles.cell, ...styles[`tile${value}`] }}>
+              <div
+                key={colIndex}
+                style={{ ...styles.cell, ...(styles as any)[`tile${value}`] }}
+              >
                 {value !== 0 ? value : ''}
               </div>
             ))}
@@ -176,7 +193,7 @@ const Game2048 = () => {
 };
 
 // Inline CSS styles
-const styles = {
+const styles: { [key: string]: CSSProperties } = {
   container: {
     textAlign: 'center',
     marginTop: '20px',
