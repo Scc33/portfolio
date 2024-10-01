@@ -192,16 +192,16 @@ function getStyles(cellSize: number): { [key: string]: React.CSSProperties } {
     score: {
       fontSize: '36px',
       marginBottom: '20px',
-      color: '#333',
+      color: '#fff', // White score color
     },
     message: {
       fontSize: '24px',
-      color: '#333',
+      color: '#fff', // White message color
       marginBottom: '10px',
     },
     board: {
       display: 'inline-block',
-      backgroundColor: '#444',
+      backgroundColor: '#000', // Set the board background to black
       padding: '10px',
       borderRadius: '10px',
     },
@@ -211,7 +211,7 @@ function getStyles(cellSize: number): { [key: string]: React.CSSProperties } {
     cell: {
       width: `${cellSize}px`,
       height: `${cellSize}px`,
-      backgroundColor: '#fff',
+      backgroundColor: '#fff', // White cell background
       margin: '5px',
       borderRadius: '10px',
       fontSize: `${cellSize * 0.6}px`,
@@ -220,6 +220,7 @@ function getStyles(cellSize: number): { [key: string]: React.CSSProperties } {
       textAlign: 'center',
       cursor: 'pointer',
       userSelect: 'none',
+      color: '#000', // Black text for X and O
     },
   };
 }
