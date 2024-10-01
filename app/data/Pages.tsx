@@ -36,4 +36,10 @@ export const PAGE_METADATA: PageMetadata[] = [
     { endpoint: "/calculators/mortgageCalc", date: "7/10/2024", name: "Mortgage Calculator" },
     { endpoint: "/snippets/statisticsSection", date: "7/11/2024", name: "Statistics Section" },
     { endpoint: "/snippets/notFound", date: "7/12/2024", name: "Not Found" },
+    { endpoint: "/snippets/404", date: "7/13/2024", name: "404" },
+    { endpoint: "/snippets", date: "7/13/2024", name: "Learning NextJs" },
+    { endpoint: "/calculators/mortgageCalc", date: "7/14/2024", name: "Mortgage Calculator" },
+    { endpoint: "/snake", date: "10/1/2024", name: "Snake Game" },
+    { endpoint: "/2048", date: "10/1/2024", name: "2048 Game" },
+    { endpoint: "/ecommerce", date: "10/1/2024", name: "E-Commerce" },
 ];
