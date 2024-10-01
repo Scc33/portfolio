@@ -96,8 +96,8 @@ const TicTacToe: React.FC<TicTacToeProps> = ({ boardSize = 3 }) => {
       for (let row = 0; row <= size - WIN_CONDITION; row++) {
         for (let col = 0; col <= size - WIN_CONDITION; col++) {
           // Diagonals from each starting point
-          const diag1 = [];
-          const diag2 = [];
+          const diag1: Player[] = []; // <-- Explicitly typed as Player[]
+          const diag2: Player[] = []; // <-- Explicitly typed as Player[]
           for (let i = 0; i < WIN_CONDITION; i++) {
             diag1.push(board[row + i][col + i]);
             diag2.push(board[row + WIN_CONDITION - 1 - i][col + i]);
@@ -152,7 +152,7 @@ const TicTacToe: React.FC<TicTacToeProps> = ({ boardSize = 3 }) => {
           )}
           {winner === 'Draw' && (
             <div style={styles.message}>
-              It's a Draw! Press Space to Restart
+              It&apos;s a Draw! Press Space to Restart
             </div>
           )}
           <div style={styles.board}>
