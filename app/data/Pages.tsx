@@ -45,4 +45,5 @@ export const PAGE_METADATA: PageMetadata[] = [
     { endpoint: "/tictactoe/3", date: "10/1/2024", name: "Tic Tac Toe 3x3" },
     { endpoint: "/tictactoe/4", date: "10/1/2024", name: "Tic Tac Toe 4x4" },
     { endpoint: "/tictactoe/5", date: "10/1/2024", name: "Tic Tac Toe 5x5" },
+    { endpoint: "/connect4", date: "10/2/2024", name: "Connect 4" },
 ];

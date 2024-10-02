@@ -5,6 +5,15 @@ import Project from "./Project";
 
 export const projectsData = [
   {
+    title: "Connect 4",
+    description:
+      "A classic Connect 4 game built with React and TypeScript.",
+    tags: ["React", "TypeScript", "CSS"],
+    imageUrl: "/connect4/connect-4-screenshot.png",
+    link: "/connect4",
+    date: "Fall 2024"
+  },
+  {
     title: "Tic Tac Toe",
     description:
       "A classic Tic Tac Toe game built with React and TypeScript.",
