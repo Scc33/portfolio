@@ -2,82 +2,131 @@
 
 import React, { useState, useEffect } from 'react';
 
-const TicTacToeGame: React.FC = () => {
-  const BOARD_SIZE = 3;
-  const INITIAL_BOARD = Array(BOARD_SIZE)
-    .fill(null)
-    .map(() => Array(BOARD_SIZE).fill(null));
+const ROWS = 6;
+const COLS = 7;
 
-  const [gameStarted, setGameStarted] = useState(false);
-  const [board, setBoard] = useState<string[][]>(INITIAL_BOARD);
-  const [currentPlayer, setCurrentPlayer] = useState<'X' | 'O'>('X');
-  const [score, setScore] = useState<{ X: number; O: number }>({ X: 0, O: 0 });
-  const [message, setMessage] = useState<string>('');
+type CellType = 'Red' | 'Yellow' | null;
+type PlayerType = 'Red' | 'Yellow';
+
+const Connect4Game: React.FC = () => {
+  const initializeBoard = () => {
+    return Array(ROWS)
+      .fill(null)
+      .map(() => Array(COLS).fill(null));
+  };
+
+  const [board, setBoard] = useState<CellType[][]>(initializeBoard());
+  const [currentPlayer, setCurrentPlayer] = useState<PlayerType>('Red');
+  const [gameActive, setGameActive] = useState<boolean>(false);
+  const [winner, setWinner] = useState<PlayerType | 'Draw' | null>(null);
+  const [score, setScore] = useState<{ Red: number; Yellow: number }>({
+    Red: 0,
+    Yellow: 0,
+  });
 
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.code === 'Space') {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.code === 'Space') {
         startGame();
       }
     };
+
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   const startGame = () => {
-    setBoard(INITIAL_BOARD);
-    setCurrentPlayer('X');
-    setGameStarted(true);
-    setMessage('');
+    setBoard(initializeBoard());
+    setCurrentPlayer('Red');
+    setGameActive(true);
+    setWinner(null);
   };
 
-  const handleClick = (row: number, col: number) => {
-    if (!gameStarted || board[row][col]) return;
+  const handleClick = (colIndex: number) => {
+    if (!gameActive || winner) return;
 
-    const newBoard = board.map((boardRow, i) =>
-      boardRow.map((cell, j) => (i === row && j === col ? currentPlayer : cell))
-    );
+    for (let row = ROWS - 1; row >= 0; row--) {
+      if (!board[row][colIndex]) {
+        const newBoard = board.map((row) => [...row]);
+        newBoard[row][colIndex] = currentPlayer;
+        setBoard(newBoard);
 
-    setBoard(newBoard);
+        if (checkWin(newBoard, row, colIndex, currentPlayer)) {
+          setWinner(currentPlayer);
+          setGameActive(false);
+          setScore((prevScore) => ({
+            ...prevScore,
+            [currentPlayer]: prevScore[currentPlayer] + 1,
+          }));
+        } else if (isBoardFull(newBoard)) {
+          setWinner('Draw');
+          setGameActive(false);
+        } else {
+          setCurrentPlayer(currentPlayer === 'Red' ? 'Yellow' : 'Red');
+        }
 
-    if (checkWin(newBoard, currentPlayer)) {
-      setScore({ ...score, [currentPlayer]: score[currentPlayer] + 1 });
-      setMessage(`Player ${currentPlayer} wins! Press Space to restart.`);
-      setGameStarted(false);
-    } else if (newBoard.flat().every((cell) => cell)) {
-      setMessage("It's a tie! Press Space to restart.");
-      setGameStarted(false);
-    } else {
-      setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
-    }
-  };
-
-  const checkWin = (board: string[][], player: 'X' | 'O') => {
-    // Check rows and columns
-    for (let i = 0; i < BOARD_SIZE; i++) {
-      if (
-        board[i].every((cell) => cell === player) ||
-        board.map((row) => row[i]).every((cell) => cell === player)
-      ) {
-        return true;
+        break;
       }
     }
+  };
 
-    // Check diagonals
-    if (
-      board.every((row, idx) => row[idx] === player) ||
-      board.every((row, idx) => row[BOARD_SIZE - idx - 1] === player)
+  const isBoardFull = (board: CellType[][]) => {
+    return board.every((row) => row.every((cell) => cell !== null));
+  };
+
+  const checkWin = (
+    board: CellType[][],
+    row: number,
+    col: number,
+    player: PlayerType
+  ) => {
+    return (
+      checkDirection(board, row, col, 0, 1, player) +
+        checkDirection(board, row, col, 0, -1, player) >=
+        3 ||
+      checkDirection(board, row, col, 1, 0, player) +
+        checkDirection(board, row, col, -1, 0, player) >=
+        3 ||
+      checkDirection(board, row, col, 1, 1, player) +
+        checkDirection(board, row, col, -1, -1, player) >=
+        3 ||
+      checkDirection(board, row, col, 1, -1, player) +
+        checkDirection(board, row, col, -1, 1, player) >=
+        3
+    );
+  };
+
+  const checkDirection = (
+    board: CellType[][],
+    row: number,
+    col: number,
+    rowDir: number,
+    colDir: number,
+    player: PlayerType
+  ): number => {
+    let count = 0;
+    let r = row + rowDir;
+    let c = col + colDir;
+    while (
+      r >= 0 &&
+      r < ROWS &&
+      c >= 0 &&
+      c < COLS &&
+      board[r][c] === player
     ) {
-      return true;
+      count++;
+      r += rowDir;
+      c += colDir;
     }
-
-    return false;
+    return count;
   };
 
   return (
     <div style={styles.container}>
       <h1 style={styles.score}>
-        Score - X: {score.X} | O: {score.O}
+        Score - Red: {score.Red} | Yellow: {score.Yellow}
       </h1>
       <div style={styles.board}>
         {board.map((row, rowIndex) => (
@@ -86,63 +135,88 @@ const TicTacToeGame: React.FC = () => {
               <div
                 key={colIndex}
                 style={styles.cell}
-                onClick={() => handleClick(rowIndex, colIndex)}
+                onClick={() => handleClick(colIndex)}
               >
-                {cell}
+                <div
+                  style={{
+                    ...styles.disc,
+                    backgroundColor: cell ? cell.toLowerCase() : 'white',
+                  }}
+                />
               </div>
             ))}
           </div>
         ))}
       </div>
-      {message && <h2 style={styles.message}>{message}</h2>}
-      {!gameStarted && (
-        <h2 style={styles.startMessage}>Press Space to Start/Restart the Game</h2>
-      )}
+      <div style={styles.message}>
+        {!gameActive && !winner && (
+          <p style={styles.instruction}>Press Space to Start</p>
+        )}
+        {gameActive && !winner && (
+          <p style={styles.turn}>{currentPlayer}&apos;s Turn</p>
+        )}
+        {winner && winner !== 'Draw' && (
+          <p style={styles.winner}>{winner} Wins!</p>
+        )}
+        {winner === 'Draw' && <p style={styles.winner}>It&apos;s a Draw!</p>}
+      </div>
     </div>
   );
 };
 
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
-    backgroundColor: '#000',
-    color: '#fff',
-    minHeight: '100vh',
+    backgroundColor: 'black',
+    color: 'white',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column' as const,
     alignItems: 'center',
     justifyContent: 'center',
   },
   score: {
-    textAlign: 'center',
+    textAlign: 'center' as const,
     marginBottom: '20px',
   },
   board: {
-    display: 'grid',
-    gridTemplateRows: 'repeat(3, 1fr)',
-    gridGap: '5px',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    backgroundColor: 'blue',
+    padding: '10px',
+    borderRadius: '10px',
   },
   row: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    gridGap: '5px',
+    display: 'flex',
   },
   cell: {
-    width: '100px',
-    height: '100px',
-    backgroundColor: '#222',
+    width: '80px',
+    height: '80px',
+    margin: '5px',
+    backgroundColor: 'darkblue',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: '3rem',
     cursor: 'pointer',
+    borderRadius: '50%',
+  },
+  disc: {
+    width: '70px',
+    height: '70px',
+    borderRadius: '50%',
+    backgroundColor: 'white',
   },
   message: {
     marginTop: '20px',
   },
-  startMessage: {
-    marginTop: '20px',
-    color: '#0f0',
+  instruction: {
+    fontSize: '24px',
+  },
+  turn: {
+    fontSize: '24px',
+  },
+  winner: {
+    fontSize: '32px',
+    fontWeight: 'bold' as const,
   },
 };
 
-export default TicTacToeGame;
+export default Connect4Game;
