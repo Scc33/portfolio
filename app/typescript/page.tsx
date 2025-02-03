@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useRef, useEffect } from 'react';
 import * as ts from 'typescript';
 import { highlight, languages } from 'prismjs';
@@ -17,20 +19,25 @@ interface TypescriptEnvironment {
   compilerOptions: ts.CompilerOptions;
 }
 
-const AdvancedTypeScriptTerminal = () => {
+const createDefaultCompilerOptions = (): ts.CompilerOptions => ({
+  strict: true,
+  target: ts.ScriptTarget.ES2015,
+  module: ts.ModuleKind.CommonJS,
+  noImplicitAny: true,
+  strictNullChecks: true,
+  jsx: ts.JsxEmit.React,  // Enable JSX compilation
+  jsxFactory: 'React.createElement',
+  jsxFragmentFactory: 'React.Fragment',
+});
+
+export default function AdvancedTypeScriptTerminal(): JSX.Element {
   // State management
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState<string>('');
   const [history, setHistory] = useState<HistoryEntry[]>([]);
-  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [historyIndex, setHistoryIndex] = useState<number>(-1);
   const [environment, setEnvironment] = useState<TypescriptEnvironment>({
-    files: new Map([['index.ts', '']]),
-    compilerOptions: {
-      strict: true,
-      target: ts.ScriptTarget.ES2015,
-      module: ts.ModuleKind.CommonJS,
-      noImplicitAny: true,
-      strictNullChecks: true,
-    }
+    files: new Map([['index.tsx', '']]),
+    compilerOptions: createDefaultCompilerOptions()
   });
 
   // Refs
@@ -39,43 +46,41 @@ const AdvancedTypeScriptTerminal = () => {
 
   // TypeScript compilation and type checking
   const typeCheck = (code: string): { errors: string[], type?: string } => {
-    // Create a virtual file system for TypeScript
     const fileMap = new Map(environment.files);
-    fileMap.set('index.ts', code);
+    fileMap.set('index.tsx', code);  // Note: Changed to .tsx extension
 
-    // Create the TypeScript compiler host
-    const compilerHost = {
-      getSourceFile: (fileName: string) => {
+    const compilerHost = ts.createCompilerHost(environment.compilerOptions);
+    
+    // Override compiler host methods for in-memory compilation
+    const customHost: ts.CompilerHost = {
+      ...compilerHost,
+      getSourceFile: (fileName: string, languageVersion: ts.ScriptTarget) => {
         const source = fileMap.get(fileName);
         return source
-          ? ts.createSourceFile(fileName, source, environment.compilerOptions.target!)
+          ? ts.createSourceFile(fileName, source, languageVersion)
           : undefined;
       },
       writeFile: () => {},
       getCurrentDirectory: () => '/',
-      getCanonicalFileName: (fileName: string) => fileName,
-      useCaseSensitiveFileNames: () => true,
-      getNewLine: () => '\n',
+      getDefaultLibFileName: () => 'lib.d.ts',
       fileExists: (fileName: string) => fileMap.has(fileName),
       readFile: (fileName: string) => fileMap.get(fileName),
-      getDefaultLibFileName: () => 'lib.d.ts',
     };
 
-    // Create and run the program
+    // Create program with custom host
     const program = ts.createProgram(
       Array.from(fileMap.keys()),
       environment.compilerOptions,
-      compilerHost
+      customHost
     );
 
-    // Get diagnostics
     const diagnostics = ts.getPreEmitDiagnostics(program);
     
-    // Get type information
+    // Get type information when possible
     let type: string | undefined;
     if (diagnostics.length === 0) {
       const checker = program.getTypeChecker();
-      const sourceFile = program.getSourceFile('index.ts');
+      const sourceFile = program.getSourceFile('index.tsx');
       if (sourceFile) {
         const lastStatement = sourceFile.statements[sourceFile.statements.length - 1];
         if (lastStatement && ts.isExpressionStatement(lastStatement)) {
@@ -98,41 +103,32 @@ const AdvancedTypeScriptTerminal = () => {
     };
   };
 
-  // Syntax highlighting
-  const highlightCode = (code: string): string => {
-    return highlight(code, languages.typescript, 'typescript');
-  };
-
-  // Command execution
-  const executeCommand = (command: string) => {
+  // Command execution with error handling
+  const executeCommand = (command: string): void => {
     let output = '';
     let typeErrors: string[] = [];
     let type: string | undefined;
 
     try {
-      // Type check the command
       const typeCheckResult = typeCheck(command);
       typeErrors = typeCheckResult.errors;
       type = typeCheckResult.type;
 
       if (typeErrors.length === 0) {
-        // Only execute if no type errors
         if (command === 'clear') {
           setHistory([]);
           return;
         } else {
-          // Evaluate the command
           const result = eval(command);
           output = String(result);
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       output = `Runtime Error: ${error.message}`;
     }
 
-    // Update history with syntax-highlighted command and results
     setHistory(prev => [...prev, {
-      command: command,
+      command,
       output,
       typeErrors,
       type
@@ -143,7 +139,7 @@ const AdvancedTypeScriptTerminal = () => {
   };
 
   // Keyboard event handling
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === 'Enter' && input.trim()) {
       executeCommand(input.trim());
     } else if (e.key === 'ArrowUp') {
@@ -166,18 +162,18 @@ const AdvancedTypeScriptTerminal = () => {
     }
   };
 
-  // Auto-scroll effect
+  // Effects
   useEffect(() => {
     if (terminalRef.current) {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
   }, [history]);
 
-  // Auto-focus effect
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
 
+  // Render terminal UI
   return (
     <div className="w-full max-w-3xl mx-auto">
       <div 
@@ -185,41 +181,35 @@ const AdvancedTypeScriptTerminal = () => {
         ref={terminalRef}
         onClick={() => inputRef.current?.focus()}
       >
-        {/* Terminal header */}
         <div className="mb-4 text-white">
           TypeScript Terminal v2 - Now with type checking!
           <br />
           Try: let x: number = 5; or function add(a: number, b: number): number { return a + b; }
         </div>
 
-        {/* Command history */}
         {history.map((entry, i) => (
           <div key={i} className="mb-4">
-            {/* Command with syntax highlighting */}
             <div className="flex">
               <span className="text-blue-400 mr-2">{'>'}</span>
               <div 
                 dangerouslySetInnerHTML={{ 
-                  __html: highlightCode(entry.command) 
+                  __html: highlight(entry.command, languages.typescript, 'typescript') 
                 }} 
               />
             </div>
             
-            {/* Type information */}
             {entry.type && (
               <div className="pl-4 text-blue-300">
                 Type: {entry.type}
               </div>
             )}
             
-            {/* Type errors */}
             {entry.typeErrors && entry.typeErrors.map((error, j) => (
               <div key={j} className="pl-4 text-red-400">
                 {error}
               </div>
             ))}
             
-            {/* Command output */}
             {entry.output && (
               <div className="pl-4 text-yellow-300">
                 {entry.output}
@@ -228,7 +218,6 @@ const AdvancedTypeScriptTerminal = () => {
           </div>
         ))}
 
-        {/* Input line */}
         <div className="flex items-center">
           <span className="text-blue-400 mr-2">{'>'}</span>
           <input
@@ -244,6 +233,4 @@ const AdvancedTypeScriptTerminal = () => {
       </div>
     </div>
   );
-};
-
-export default AdvancedTypeScriptTerminal;
+}
