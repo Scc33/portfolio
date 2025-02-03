@@ -30,13 +30,31 @@ export function JavaScriptTerminal(): JSX.Element {
 
         let output: string;
         try {
+            // First, attempt to execute the code and capture its result
             const evalFn = new Function(
                 "context",
-                `with (context) { return ${command} }`
+                `with (context) {
+          try {
+            const result = eval(${JSON.stringify(command)});
+            // Handle assignments by checking if the command contains an equals sign
+            if (${JSON.stringify(command)}.includes('=')) {
+              const varName = ${JSON.stringify(command)}.split('=')[0].trim();
+              if (!varName.includes('.')) {  // Only store top-level variables
+                context[varName] = result;
+              }
+            }
+            return result;
+          } catch (e) {
+            // If direct eval fails, try wrapping in parentheses for expressions
+            return eval("(" + ${JSON.stringify(command)} + ")");
+          }
+        }`
             );
+
             const result = evalFn(contextRef.current);
             output = result !== undefined ? String(result) : "undefined";
         } catch (error: any) {
+            // If both attempts fail, it's an error
             output = `Error: ${error.message}`;
         }
 
