@@ -19,12 +19,16 @@ export function JavaScriptTerminal(): JSX.Element {
     const executeCommand = (command: string): void => {
         if (command === "clear") {
             setHistory([]);
+            setInput("");
+            setHistoryIndex(-1);
             return;
         }
 
         if (command === "vars") {
             const output = JSON.stringify(contextRef.current, null, 2);
             setHistory((prev) => [...prev, { command, output }]);
+            setInput("");
+            setHistoryIndex(-1);
             return;
         }
 
