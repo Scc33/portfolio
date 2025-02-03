@@ -38,11 +38,17 @@ export function TypeScriptTerminal(): JSX.Element {
     const terminalRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const typeCheck = (code: string): { errors: string[]; type?: string } => {
+    // Store variables in a closure to maintain state between evaluations
+    const evaluationContext = useRef<Record<string, any>>({});
+
+    const typeCheck = (
+        code: string
+    ): { errors: string[]; type?: string; compiledCode?: string } => {
         const fileMap = new Map(environment.files);
         fileMap.set("index.tsx", code);
 
         const compilerHost = ts.createCompilerHost(environment.compilerOptions);
+        let outputCode = "";
 
         const customHost: ts.CompilerHost = {
             ...compilerHost,
@@ -55,7 +61,9 @@ export function TypeScriptTerminal(): JSX.Element {
                     ? ts.createSourceFile(fileName, source, languageVersion)
                     : undefined;
             },
-            writeFile: () => {},
+            writeFile: (fileName: string, text: string) => {
+                outputCode = text;
+            },
             getCurrentDirectory: () => "/",
             getDefaultLibFileName: () => "lib.d.ts",
             fileExists: (fileName: string) => fileMap.has(fileName),
@@ -91,6 +99,9 @@ export function TypeScriptTerminal(): JSX.Element {
                     }
                 }
             }
+
+            // Emit the JavaScript code
+            program.emit();
         }
 
         return {
@@ -101,7 +112,8 @@ export function TypeScriptTerminal(): JSX.Element {
                 );
                 return `Type Error: ${message}`;
             }),
-            type
+            type,
+            compiledCode: outputCode
         };
     };
 
@@ -111,18 +123,36 @@ export function TypeScriptTerminal(): JSX.Element {
         let type: string | undefined;
 
         try {
+            // Special commands
+            if (command === "clear") {
+                setHistory([]);
+                return;
+            }
+
+            if (command === "vars") {
+                output = JSON.stringify(evaluationContext.current, null, 2);
+                setHistory((prev) => [...prev, { command, output }]);
+                return;
+            }
+
+            // Regular TypeScript execution
             const typeCheckResult = typeCheck(command);
             typeErrors = typeCheckResult.errors;
             type = typeCheckResult.type;
 
-            if (typeErrors.length === 0) {
-                if (command === "clear") {
-                    setHistory([]);
-                    return;
-                } else {
-                    const result = eval(command);
-                    output = String(result);
-                }
+            if (typeErrors.length === 0 && typeCheckResult.compiledCode) {
+                // Create a function that captures our evaluation context
+                const evalFn = new Function(
+                    "context",
+                    `with (context) { ${typeCheckResult.compiledCode} }`
+                );
+
+                // Execute the compiled code with our context
+                const result = evalFn(evaluationContext.current);
+
+                // If it's a variable declaration, it will be added to our context automatically
+                // For expressions, we'll see the result
+                output = result !== undefined ? String(result) : "undefined";
             }
         } catch (error: any) {
             output = `Runtime Error: ${error.message}`;
@@ -186,7 +216,10 @@ export function TypeScriptTerminal(): JSX.Element {
                     TypeScript Terminal v2 - Now with type checking!
                     <br />
                     Try: let x: number = 5; or function add(a: number, b:
-                    number): number {"{return a + b}"}
+                    number): number {"{ return a + b; }"}
+                    <br />
+                    Type &apos;vars&apos; to see all defined variables. Type
+                    &apos;clear&apos; to reset.
                 </div>
 
                 {history.map((entry, i) => {
@@ -226,7 +259,7 @@ export function TypeScriptTerminal(): JSX.Element {
                 })}
 
                 <div className="flex items-center">
-                    <span className="text-blue-400 mr-2">{">"}</span>
+                    <span className="text-blue-400 mr-2">&gt;</span>
                     <input
                         ref={inputRef}
                         type="text"
