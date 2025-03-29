@@ -5,6 +5,15 @@ import Project from "./Project";
 
 export const projectsData = [
     {
+        title: "BuddyCSS",
+        description:
+            "An iOS app designed to teach CSS fundamentals through a structured, gamified learning experience.",
+        tags: ["iOS", "Swift", "SwiftUI", "CSS", "Education"],
+        imageUrl: "/buddyCSS/buddyCSSHome-screenshot.png",
+        link: "/buddyCSS",
+        date: "Spring 2025"
+    },
+    {
         title: "JavaScript REPL",
         description: "An in browser implementation of a JavaScript REPL.",
         tags: ["React", "TypeScript", "JavaScript"],

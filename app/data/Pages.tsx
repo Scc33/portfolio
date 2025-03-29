@@ -6,6 +6,21 @@ export type PageMetadata = {
 
 export const PAGE_METADATA: PageMetadata[] = [
     {
+        endpoint: "/buddyCSS",
+        date: "3/15/2025",
+        name: "BuddyCSS App"
+    },
+    {
+        endpoint: "/buddyCSS/privacy",
+        date: "3/15/2025",
+        name: "BuddyCSS Privacy Policy"
+    },
+    {
+        endpoint: "/javascript",
+        date: "2/3/2025",
+        name: "JavaScript REPL"
+    },
+    {
         endpoint: "/snippets/testimonialCard",
         date: "7/1/2024",
         name: "Testimonial Card"
@@ -69,6 +84,5 @@ export const PAGE_METADATA: PageMetadata[] = [
     { endpoint: "/tictactoe/3", date: "10/1/2024", name: "Tic Tac Toe 3x3" },
     { endpoint: "/tictactoe/4", date: "10/1/2024", name: "Tic Tac Toe 4x4" },
     { endpoint: "/tictactoe/5", date: "10/1/2024", name: "Tic Tac Toe 5x5" },
-    { endpoint: "/connect4", date: "10/2/2024", name: "Connect 4" },
-    { endpoint: "/javascript", date: "2/3/2025", name: "JavaScript REPL" }
+    { endpoint: "/connect4", date: "10/2/2024", name: "Connect 4" }
 ];
