@@ -7,6 +7,7 @@ import {
     Layout,
     Trophy
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
@@ -58,10 +59,15 @@ export default function Page() {
                         </div>
                         <div className="w-full md:w-1/2 flex justify-center">
                             <div className="w-64 h-96 bg-black rounded-3xl p-3 shadow-xl">
-                                <div className="w-full h-full bg-white rounded-2xl flex items-center justify-center">
-                                    <span className="text-xl font-semibold text-center text-black p-4">
-                                        BuddyCSS App Screenshot Coming Soon
-                                    </span>
+                                <div className="w-full h-full bg-white rounded-2xl overflow-hidden">
+                                    <Image
+                                        src="/buddyCSS/buddyCSSHome-screenshot.png"
+                                        alt="Buddy CSS Homepage"
+                                        width={256}
+                                        height={500}
+                                        className="w-full h-full object-cover object-top"
+                                        priority
+                                    />
                                 </div>
                             </div>
                         </div>

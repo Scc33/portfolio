@@ -9,7 +9,7 @@ export const projectsData = [
         description:
             "An iOS app designed to teach CSS fundamentals through a structured, gamified learning experience.",
         tags: ["iOS", "Swift", "SwiftUI", "CSS", "Education"],
-        imageUrl: "/buddyCSS/buddyCSS-screenshot.png",
+        imageUrl: "/buddyCSS/buddyCSSHome-screenshot.png",
         link: "/buddyCSS",
         date: "Spring 2025"
     },
