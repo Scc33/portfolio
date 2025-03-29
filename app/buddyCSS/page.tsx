@@ -39,7 +39,7 @@ export default function Page() {
                                 BuddyCSS is a mobile platform designed to make
                                 learning CSS accessible, engaging, and fun. With
                                 a structured path from basics to advanced
-                                concepts, you'll master CSS one lesson at a
+                                concepts, you&apos;ll master CSS one lesson at a
                                 time.
                             </p>
                             <div className="flex items-center space-x-2 mb-2">
@@ -122,7 +122,7 @@ export default function Page() {
 
                 <div className="mb-12">
                     <h2 className="text-2xl font-semibold mb-6">
-                        What You'll Learn
+                        What You&apos;ll Learn
                     </h2>
                     <div className="space-y-4">
                         <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">

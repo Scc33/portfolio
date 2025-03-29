@@ -18,7 +18,7 @@ export default function PrivacyPage() {
                     <p className="text-lg">
                         At BuddyCSS, we take privacy seriously. Our approach is
                         simple:{" "}
-                        <strong>we don't collect any data at all.</strong>
+                        <strong>we don&apos;t collect any data at all.</strong>
                     </p>
 
                     <h2 className="text-2xl font-semibold mt-6 mb-4">
@@ -61,8 +61,8 @@ export default function PrivacyPage() {
                     <p>
                         We may update our Privacy Policy from time to time. We
                         will notify you of any changes by posting the new
-                        Privacy Policy on this page and updating the "Last
-                        updated" date at the top.
+                        Privacy Policy on this page and updating the &quot;Last
+                        updated&quot; date at the top.
                     </p>
 
                     <h2 className="text-2xl font-semibold mt-6 mb-4">
