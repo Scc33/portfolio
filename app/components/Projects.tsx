@@ -9,7 +9,7 @@ export const projectsData = [
         description:
             "Interactive SQL tutorials and exercises to learn SQL in the browser.",
         tags: ["NextJS", "Tailwind", "SQL.js"],
-        imageUrl: "/buddySQL/buddySQL-screenshot.png",
+        imageUrl: "/buddySQL/buddySQL.png",
         link: "https://buddysql.seancoughlin.me",
         date: "Spring 2025"
     },
