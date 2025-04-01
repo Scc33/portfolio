@@ -5,6 +5,15 @@ import Project from "./Project";
 
 export const projectsData = [
     {
+        title: "BuddySQL",
+        description:
+            "Interactive SQL tutorials and exercises to learn SQL in the browser.",
+        tags: ["NextJS", "Tailwind", "SQL.js"],
+        imageUrl: "/buddySQL/buddySQL-screenshot.png",
+        link: "https://buddysql.seancoughlin.me",
+        date: "Spring 2025"
+    },
+    {
         title: "BuddyCSS",
         description:
             "An iOS app designed to teach CSS fundamentals through a structured, gamified learning experience.",
