@@ -5,6 +5,15 @@ import Project from "./Project";
 
 export const projectsData = [
     {
+        title: "Algorithm Visualizer",
+        description:
+            "Clean visuals to see and manipulate visuals within the browser.",
+        tags: ["NextJS", "Tailwind", "Data Structures"],
+        imageUrl: "/algorithm-visualizer/visualizer.png",
+        link: "https://algorithm-visualizer.seancoughlin.me",
+        date: "Spring 2025"
+    },
+    {
         title: "BuddySQL",
         description:
             "Interactive SQL tutorials and exercises to learn SQL in the browser.",
