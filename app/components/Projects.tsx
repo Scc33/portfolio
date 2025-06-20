@@ -5,6 +5,15 @@ import Project from "./Project";
 
 export const projectsData = [
     {
+        title: "Perplexity Clone",
+        description:
+            "A clone of the popular search engine Perplexity built with React and TypeScript.",
+        tags: ["NextJS", "React", "TypeScript", "CSS"],
+        imageUrl: "/perplexity/perplexity-screenshot.png",
+        link: "/perplexity",
+        date: "Summer 2025"
+    },
+    {
         title: "Algorithm Visualizer",
         description:
             "Clean visuals to see and manipulate visuals within the browser.",
