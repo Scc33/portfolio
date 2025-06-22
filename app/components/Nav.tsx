@@ -4,6 +4,9 @@ const navItems = {
     "/": {
         name: "Home"
     },
+    "/tags": {
+        name: "Tags"
+    },
     "https://github.com/Scc33": {
         name: "GitHub"
     },

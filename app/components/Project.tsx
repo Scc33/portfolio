@@ -32,11 +32,14 @@ export default function Project({
                         </p>
                         <ul className="flex flex-wrap gap-2 sm:mt-auto">
                             {tags.map((tag, index) => (
-                                <li
-                                    className="bg-black/[0.7] px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white rounded-full"
-                                    key={index}
-                                >
-                                    {tag}
+                                <li key={index}>
+                                    <Link
+                                        href={`/${encodeURIComponent(tag.toLowerCase())}`}
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="bg-black/[0.7] px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white rounded-full hover:bg-black/[0.8] transition-colors"
+                                    >
+                                        {tag}
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
