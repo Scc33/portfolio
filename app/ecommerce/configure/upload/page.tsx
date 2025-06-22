@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { cn } from "../../lib/utils";
-import Dropzone, { FileRejection } from "react-dropzone";
+import Dropzone from "react-dropzone";
 import { Image, Loader2, MousePointerSquareDashed } from "lucide-react";
 import { Progress } from "../../components/progress";
 import { useUploadThing } from "../../lib/uploadthing";
@@ -17,13 +17,13 @@ const Page = () => {
         onClientUploadComplete: ([data]) => {
             const configId = data.serverData.configId;
             startTransition(() => {
-                router.push(`/configure/design?id=${configId}`)
-            })
+                router.push(`/configure/design?id=${configId}`);
+            });
         },
         onUploadProgress(p) {
             setUploadProgress(p);
         }
-    })
+    });
 
     const onDropRejected = () => {
         console.log("Rejected");

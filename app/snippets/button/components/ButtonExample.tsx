@@ -1,4 +1,4 @@
-import { Button, IconButton } from "./IconButton";
+import { Button } from "./IconButton";
 
 const StarIcon = () => (
     <svg

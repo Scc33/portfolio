@@ -13,7 +13,7 @@ export default function SnakeGame(): JSX.Element {
     const [snake, setSnake] = useState<Coordinate[]>([]);
     const [food, setFood] = useState<Coordinate | null>(null);
 
-    function startGame(): void {
+    const startGame = React.useCallback((): void => {
         setGameState("running");
         // Initialize the snake in the center
         const initialSnake: Coordinate[] = [
@@ -32,7 +32,7 @@ export default function SnakeGame(): JSX.Element {
         setDirection(randomDirection);
         // Place the first food
         placeFood(initialSnake);
-    }
+    }, []);
 
     function placeFood(snake: Coordinate[]): void {
         let newFood: Coordinate;
@@ -54,7 +54,7 @@ export default function SnakeGame(): JSX.Element {
         setFood(newFood);
     }
 
-    function moveSnake(): void {
+    const moveSnake = React.useCallback((): void => {
         const newHead: Coordinate = {
             x: snake[0].x + direction.x,
             y: snake[0].y + direction.y
@@ -81,7 +81,7 @@ export default function SnakeGame(): JSX.Element {
             return;
         }
 
-        let newSnake = [newHead, ...snake];
+        const newSnake = [newHead, ...snake];
 
         // Check if food is eaten
         if (food && newHead.x === food.x && newHead.y === food.y) {
@@ -91,7 +91,7 @@ export default function SnakeGame(): JSX.Element {
         }
 
         setSnake(newSnake);
-    }
+    }, [snake, direction, food, gridSize]);
 
     useEffect(() => {
         if (gameState === "running") {
@@ -100,7 +100,7 @@ export default function SnakeGame(): JSX.Element {
             }, 100); // Adjust speed here
             return () => clearInterval(intervalId);
         }
-    }, [gameState, snake, direction]);
+    }, [gameState, snake, direction, moveSnake]);
 
     useEffect(() => {
         function handleKeyDown(event: KeyboardEvent): void {
@@ -130,7 +130,7 @@ export default function SnakeGame(): JSX.Element {
 
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [gameState, direction]);
+    }, [gameState, direction, startGame]);
 
     return (
         <>
