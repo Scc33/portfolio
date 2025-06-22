@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 type Direction = { x: number; y: number };
 type Coordinate = { x: number; y: number };
 
-export default function SnakeGame(): JSX.Element {
+export default function SnakeGame() {
     const gridSize = 30;
     const [gameState, setGameState] = useState<"idle" | "running" | "over">(
         "idle"

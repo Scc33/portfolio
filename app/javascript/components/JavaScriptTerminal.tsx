@@ -7,7 +7,7 @@ interface HistoryEntry {
     output: string;
 }
 
-export function JavaScriptTerminal(): JSX.Element {
+export function JavaScriptTerminal() {
     const [input, setInput] = useState("");
     const [history, setHistory] = useState<HistoryEntry[]>([]);
     const [historyIndex, setHistoryIndex] = useState(-1);
