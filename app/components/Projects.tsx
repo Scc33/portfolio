@@ -117,7 +117,7 @@ export default function Projects() {
             id="projects"
             className="scroll-mt-28 mb-24 flex justify-center"
         >
-            <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {projectsData.map((project, index) => (
                     <Fragment key={index}>
                         <Project {...project} />

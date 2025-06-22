@@ -7,17 +7,11 @@ const navItems = {
     "https://github.com/Scc33": {
         name: "GitHub"
     },
-    "https://github.com/Scc33/portfolio": {
-        name: "View Source"
-    },
     "https://blog.seancoughlin.me": {
         name: "Blog"
     },
-    "https://seancoughlin.me": {
-        name: "Website"
-    },
-    "https://portfolio.seancoughlin.me/sitemap.xml": {
-        name: "Sitemap"
+    "https://www.linkedin.com/in/sean-coughlin/": {
+        name: "LinkedIn"
     }
 };
 
@@ -48,7 +42,9 @@ export default function Footer() {
                             <Link
                                 className="flex items-center transition-all"
                                 rel="noopener noreferrer"
-                                target="_blank"
+                                target={
+                                    path.startsWith("/") ? "_self" : "_blank"
+                                }
                                 href={path}
                             >
                                 <ArrowIcon />
@@ -58,7 +54,7 @@ export default function Footer() {
                     );
                 })}
             </ul>
-            <p className="mt-8">
+            <p className="mt-8 text-neutral-600">
                 Sean Coughlin © {new Date().getFullYear()} MIT Licensed
             </p>
         </footer>
