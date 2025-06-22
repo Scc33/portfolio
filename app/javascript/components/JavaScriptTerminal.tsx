@@ -134,7 +134,7 @@ export function JavaScriptTerminal(): JSX.Element {
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         onKeyDown={handleKeyDown}
-                        className="flex-1 bg-transparent outline-none"
+                        className="flex-1 bg-transparent outline-hidden"
                         spellCheck={false}
                     />
                 </div>

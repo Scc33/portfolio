@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function PerplexityDemo() {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white">
+        <div className="min-h-screen bg-linear-to-br from-gray-900 via-blue-900 to-gray-900 text-white">
             {/* Back to Portfolio Link */}
             <div className="container mx-auto px-4 pt-6">
                 <Link
@@ -29,7 +29,7 @@ export default function PerplexityDemo() {
             <div className="container mx-auto px-4 py-16">
                 {/* Header */}
                 <div className="text-center mb-16">
-                    <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    <h1 className="text-5xl font-bold mb-4 bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                         Perplexity Clone
                     </h1>
                     <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -58,7 +58,7 @@ export default function PerplexityDemo() {
 
                 {/* Features */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                    <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700">
+                    <div className="bg-gray-800/50 backdrop-blur-xs rounded-lg p-6 border border-gray-700">
                         <div className="text-blue-400 text-2xl mb-4">🤖</div>
                         <h3 className="text-xl font-semibold mb-2">
                             AI Integration
@@ -69,7 +69,7 @@ export default function PerplexityDemo() {
                         </p>
                     </div>
 
-                    <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700">
+                    <div className="bg-gray-800/50 backdrop-blur-xs rounded-lg p-6 border border-gray-700">
                         <div className="text-purple-400 text-2xl mb-4">🔍</div>
                         <h3 className="text-xl font-semibold mb-2">
                             Web Search
@@ -80,7 +80,7 @@ export default function PerplexityDemo() {
                         </p>
                     </div>
 
-                    <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700">
+                    <div className="bg-gray-800/50 backdrop-blur-xs rounded-lg p-6 border border-gray-700">
                         <div className="text-green-400 text-2xl mb-4">💾</div>
                         <h3 className="text-xl font-semibold mb-2">
                             Local Storage
@@ -91,7 +91,7 @@ export default function PerplexityDemo() {
                         </p>
                     </div>
 
-                    <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700">
+                    <div className="bg-gray-800/50 backdrop-blur-xs rounded-lg p-6 border border-gray-700">
                         <div className="text-yellow-400 text-2xl mb-4">📱</div>
                         <h3 className="text-xl font-semibold mb-2">
                             Responsive Design
@@ -102,7 +102,7 @@ export default function PerplexityDemo() {
                         </p>
                     </div>
 
-                    <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700">
+                    <div className="bg-gray-800/50 backdrop-blur-xs rounded-lg p-6 border border-gray-700">
                         <div className="text-red-400 text-2xl mb-4">⚡</div>
                         <h3 className="text-xl font-semibold mb-2">
                             Next.js 15
@@ -113,7 +113,7 @@ export default function PerplexityDemo() {
                         </p>
                     </div>
 
-                    <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700">
+                    <div className="bg-gray-800/50 backdrop-blur-xs rounded-lg p-6 border border-gray-700">
                         <div className="text-indigo-400 text-2xl mb-4">🔒</div>
                         <h3 className="text-xl font-semibold mb-2">
                             Privacy First
@@ -126,7 +126,7 @@ export default function PerplexityDemo() {
                 </div>
 
                 {/* Tech Stack */}
-                <div className="bg-gray-800/30 backdrop-blur-sm rounded-lg p-8 mb-16 border border-gray-700">
+                <div className="bg-gray-800/30 backdrop-blur-xs rounded-lg p-8 mb-16 border border-gray-700">
                     <h2 className="text-3xl font-bold mb-6 text-center">
                         Tech Stack
                     </h2>
