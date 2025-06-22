@@ -27,7 +27,7 @@ const BlogCard = () => {
                 </p>
                 <Link
                     href="/"
-                    className="text-indigo-700 font-medium hover:text-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 inline-flex items-center"
+                    className="text-indigo-700 font-medium hover:text-indigo-800 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 inline-flex items-center"
                 >
                     Read more
                     <svg

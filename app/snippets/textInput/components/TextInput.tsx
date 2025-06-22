@@ -53,7 +53,7 @@ const TextInput: React.FC<TextInputProps> = ({
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                     placeholder={placeholder}
-                    className={`w-full px-3 py-2 text-base text-neutral-900 bg-neutral-50 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                    className={`w-full px-3 py-2 text-base text-neutral-900 bg-neutral-50 border rounded-md focus:outline-hidden focus:ring-2 focus:ring-indigo-500 ${
                         icon ? "pl-10" : ""
                     } ${
                         error

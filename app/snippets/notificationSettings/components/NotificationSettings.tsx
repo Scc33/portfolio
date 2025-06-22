@@ -81,7 +81,7 @@ const NotificationSettings: React.FC = () => {
     if (error) {
         return (
             <div
-                className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-sm relative"
                 role="alert"
             >
                 <strong className="font-bold">Unexpected error </strong>
@@ -132,7 +132,7 @@ const NotificationSettings: React.FC = () => {
 
             <button
                 onClick={saveChanges}
-                className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
                 Save changes
             </button>

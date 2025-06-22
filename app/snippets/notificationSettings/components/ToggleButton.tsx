@@ -13,7 +13,7 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({
         <button
             onClick={onToggle}
             disabled={disabled}
-            className={`relative inline-flex items-center h-6 rounded-full w-11 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+            className={`relative inline-flex items-center h-6 rounded-full w-11 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
                 isOn ? "bg-indigo-600" : "bg-gray-200"
             } ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
         >

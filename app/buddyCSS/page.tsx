@@ -29,7 +29,7 @@ export default function Page() {
                     </p>
                 </div>
 
-                <div className="mb-12 bg-gradient-to-r from-indigo-100 to-blue-100 dark:from-indigo-900 dark:to-blue-900 p-8 rounded-xl">
+                <div className="mb-12 bg-linear-to-r from-indigo-100 to-blue-100 dark:from-indigo-900 dark:to-blue-900 p-8 rounded-xl">
                     <div className="flex flex-col md:flex-row items-center gap-8">
                         <div className="w-full md:w-1/2">
                             <h2 className="text-2xl font-semibold mb-4">
@@ -79,7 +79,7 @@ export default function Page() {
                         Core Features
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                        <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-xs border border-gray-200 dark:border-gray-700">
                             <div className="mb-4 flex justify-center">
                                 <Book className="h-10 w-10 text-indigo-600" />
                             </div>
@@ -92,7 +92,7 @@ export default function Page() {
                             </p>
                         </div>
 
-                        <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                        <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-xs border border-gray-200 dark:border-gray-700">
                             <div className="mb-4 flex justify-center">
                                 <Code className="h-10 w-10 text-indigo-600" />
                             </div>
@@ -105,7 +105,7 @@ export default function Page() {
                             </p>
                         </div>
 
-                        <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                        <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-xs border border-gray-200 dark:border-gray-700">
                             <div className="mb-4 flex justify-center">
                                 <Trophy className="h-10 w-10 text-indigo-600" />
                             </div>
@@ -125,9 +125,9 @@ export default function Page() {
                         What You&apos;ll Learn
                     </h2>
                     <div className="space-y-4">
-                        <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                        <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-xs border border-gray-200 dark:border-gray-700">
                             <div className="flex items-start">
-                                <div className="flex-shrink-0 mt-1">
+                                <div className="shrink-0 mt-1">
                                     <Palette className="h-6 w-6 text-indigo-600" />
                                 </div>
                                 <div className="ml-4">
@@ -142,9 +142,9 @@ export default function Page() {
                             </div>
                         </div>
 
-                        <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                        <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-xs border border-gray-200 dark:border-gray-700">
                             <div className="flex items-start">
-                                <div className="flex-shrink-0 mt-1">
+                                <div className="shrink-0 mt-1">
                                     <Layout className="h-6 w-6 text-indigo-600" />
                                 </div>
                                 <div className="ml-4">
@@ -159,9 +159,9 @@ export default function Page() {
                             </div>
                         </div>
 
-                        <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                        <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-xs border border-gray-200 dark:border-gray-700">
                             <div className="flex items-start">
-                                <div className="flex-shrink-0 mt-1">
+                                <div className="shrink-0 mt-1">
                                     <Smartphone className="h-6 w-6 text-indigo-600" />
                                 </div>
                                 <div className="ml-4">
@@ -188,7 +188,7 @@ export default function Page() {
                     </p>
                     <Link
                         href="/buddyCSS/privacy"
-                        className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
+                        className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-xs text-white bg-indigo-600 hover:bg-indigo-700"
                     >
                         View Privacy Policy
                     </Link>
