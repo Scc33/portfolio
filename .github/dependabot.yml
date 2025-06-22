@@ -1,0 +1,13 @@
+version: 2
+updates:
+  # Enable version updates for npm (Bun)
+  - package-ecosystem: "npm"
+    directory: "/" # Location of package.json
+    schedule:
+      interval: "weekly"
+
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/" # Location of .github/workflows
+    schedule:
+      interval: "weekly"
