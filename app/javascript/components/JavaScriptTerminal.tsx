@@ -7,14 +7,14 @@ interface HistoryEntry {
     output: string;
 }
 
-export function JavaScriptTerminal(): JSX.Element {
+export function JavaScriptTerminal() {
     const [input, setInput] = useState("");
     const [history, setHistory] = useState<HistoryEntry[]>([]);
     const [historyIndex, setHistoryIndex] = useState(-1);
 
     const terminalRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
-    const contextRef = useRef<Record<string, any>>({});
+    const contextRef = useRef<Record<string, unknown>>({});
 
     const executeCommand = (command: string): void => {
         if (command === "clear") {
@@ -57,9 +57,11 @@ export function JavaScriptTerminal(): JSX.Element {
 
             const result = evalFn(contextRef.current);
             output = result !== undefined ? String(result) : "undefined";
-        } catch (error: any) {
+        } catch (error: unknown) {
             // If both attempts fail, it's an error
-            output = `Error: ${error.message}`;
+            const errorMessage =
+                error instanceof Error ? error.message : String(error);
+            output = `Error: ${errorMessage}`;
         }
 
         setHistory((prev) => [...prev, { command, output }]);

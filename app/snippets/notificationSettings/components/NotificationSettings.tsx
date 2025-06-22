@@ -29,6 +29,7 @@ const NotificationSettings: React.FC = () => {
             setPreferences(data.preferences);
             setIsLoading(false);
         } catch (error) {
+            console.error(error);
             setError(
                 "We're facing some issues at the moment. Please try again later or contact support."
             );
@@ -68,6 +69,7 @@ const NotificationSettings: React.FC = () => {
 
             alert("Changes saved successfully");
         } catch (error) {
+            console.error(error);
             setError(
                 "Unexpected error. Please try again later or contact support."
             );
