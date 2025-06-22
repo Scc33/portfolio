@@ -39,9 +39,10 @@
   },
   "devDependencies": {
     "@types/prismjs": "^1.26.5",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.4",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint": "9.29.0",
+    "eslint-config-next": "15.3.4",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.5.0",
     "prettier": "3.3.2"
   }
 }
