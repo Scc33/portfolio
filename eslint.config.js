@@ -27,6 +27,7 @@ const eslintConfig = [
     rules: {
       "@typescript-eslint/no-unused-vars": "error",
       "@typescript-eslint/no-explicit-any": "warn",
+      "import/no-named-as-default": "off",
       "import/order": [
         "error",
         {
