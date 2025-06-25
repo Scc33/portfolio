@@ -1,5 +1,10 @@
 {
   "private": true,
+  "engines": {
+    "node": ">=18.0.0 <=24.x",
+    "npm": ">=8.0.0",
+    "pnpm": ">=8.0.0"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -15,9 +20,9 @@
     "@radix-ui/react-progress": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/postcss": "4.1.10",
-    "@types/node": "24.0.4",
-    "@types/react": "19.1.8",
-    "@types/react-dom": "19.1.6",
+    "@types/node": "^24.0.4",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "@uploadthing/react": "^7.3.2",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
@@ -25,25 +30,25 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.19.1",
     "lucide-react": "^0.523.0",
-    "next": "15.3.4",
+    "next": "^15.3.4",
     "postcss": "^8.5.6",
     "prismjs": "^1.30.0",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-dropzone": "^14.2.8",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.10",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "5.8.3",
+    "typescript": "^5.8.3",
     "uploadthing": "^7.7.3",
     "zod": "^3.25.67"
   },
   "devDependencies": {
     "@types/prismjs": "^1.26.5",
-    "eslint": "9.29.0",
-    "eslint-config-next": "15.3.4",
+    "eslint": "^9.29.0",
+    "eslint-config-next": "^15.3.4",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.5.1",
-    "prettier": "3.6.1"
+    "prettier": "^3.6.1"
   }
 }
