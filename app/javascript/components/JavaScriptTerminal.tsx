@@ -108,6 +108,15 @@ export function JavaScriptTerminal() {
         className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm h-96 overflow-y-auto"
         ref={terminalRef}
         onClick={() => inputRef.current?.focus()}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            inputRef.current?.focus();
+          }
+        }}
+        role="button"
+        tabIndex={0}
+        aria-label="Click or press Enter to focus the terminal input"
       >
         <div className="mb-4 text-white">
           JavaScript Terminal

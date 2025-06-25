@@ -68,6 +68,13 @@ const Connect4Game: React.FC = () => {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent, colIndex: number) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleClick(colIndex);
+    }
+  };
+
   const isBoardFull = (board: CellType[][]) => {
     return board.every((row) => row.every((cell) => cell !== null));
   };
@@ -122,10 +129,14 @@ const Connect4Game: React.FC = () => {
         {board.map((row, rowIndex) => (
           <div key={rowIndex} style={styles.row}>
             {row.map((cell, colIndex) => (
-              <div
+              <button
                 key={colIndex}
                 style={styles.cell}
                 onClick={() => handleClick(colIndex)}
+                onKeyDown={(e) => handleKeyDown(e, colIndex)}
+                disabled={!gameActive || !!winner}
+                aria-label={`Drop ${currentPlayer} disc in column ${colIndex + 1}`}
+                type="button"
               >
                 <div
                   style={{
@@ -133,7 +144,7 @@ const Connect4Game: React.FC = () => {
                     backgroundColor: cell ? cell.toLowerCase() : "white"
                   }}
                 />
-              </div>
+              </button>
             ))}
           </div>
         ))}
@@ -186,7 +197,9 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: "center",
     justifyContent: "center",
     cursor: "pointer",
-    borderRadius: "50%"
+    borderRadius: "50%",
+    border: "none",
+    outline: "none"
   },
   disc: {
     width: "70px",
