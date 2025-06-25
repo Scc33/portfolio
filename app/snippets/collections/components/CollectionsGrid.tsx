@@ -1,6 +1,6 @@
-import { Collection } from "../data/CollectionsData";
+import { Collection , collectionsData } from "../data/CollectionsData";
+
 import CollectionCard from "./CollectionsCard";
-import { collectionsData } from "../data/CollectionsData";
 
 const CollectionsGrid = () => {
   return (

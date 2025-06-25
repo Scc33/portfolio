@@ -1,11 +1,14 @@
 "use client";
 
-import { HTMLAttributes, useEffect, useRef, useState } from "react";
-import MaxWidthWrapper from "./MaxWidthWrapper";
 import { useInView } from "framer-motion";
-import { cn } from "../lib/utils";
-import Phone from "./Phone";
 import Image from "next/image";
+import { HTMLAttributes, useEffect, useRef, useState } from "react";
+
+import { cn } from "../lib/utils";
+
+import MaxWidthWrapper from "./MaxWidthWrapper";
+import Phone from "./Phone";
+
 
 const PHONES = [
   "/ecommerce/testimonials/1.jpg",

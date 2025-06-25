@@ -1,9 +1,11 @@
 "use client";
 
-import { useRef } from "react";
 import Image from "next/image";
-import { projectsData } from "./Projects";
 import Link from "next/link";
+import { useRef } from "react";
+
+import { projectsData } from "./Projects";
+
 
 type ProjectProps = (typeof projectsData)[number];
 

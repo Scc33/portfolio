@@ -1,5 +1,6 @@
-import FetchUsers from "./components/UsersList";
 import { Users } from "lucide-react";
+
+import FetchUsers from "./components/UsersList";
 
 export const metadata = {
   title: "Fetch Example",

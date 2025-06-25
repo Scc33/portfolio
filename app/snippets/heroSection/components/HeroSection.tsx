@@ -1,6 +1,7 @@
-import { Button } from "../../button/components/Button";
 import { Check } from "lucide-react";
 import Image from "next/image";
+
+import { Button } from "../../button/components/Button";
 
 interface HeroSectionProps {
   isVisible: boolean;
