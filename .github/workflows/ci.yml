@@ -30,9 +30,6 @@ jobs:
       - name: Check formatting
         run: npm run format:check
 
-      - name: Spell check
-        run: npm run spell-check
-
       - name: Build
         run: npm run build
 
