@@ -6,7 +6,6 @@ import { useRef } from "react";
 
 import { projectsData } from "./Projects";
 
-
 type ProjectProps = (typeof projectsData)[number];
 
 export default function Project({

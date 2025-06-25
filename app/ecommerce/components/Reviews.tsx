@@ -9,7 +9,6 @@ import { cn } from "../lib/utils";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import Phone from "./Phone";
 
-
 const PHONES = [
   "/ecommerce/testimonials/1.jpg",
   "/ecommerce/testimonials/2.jpg",

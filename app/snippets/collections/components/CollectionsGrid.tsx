@@ -1,4 +1,4 @@
-import { Collection , collectionsData } from "../data/CollectionsData";
+import { Collection, collectionsData } from "../data/CollectionsData";
 
 import CollectionCard from "./CollectionsCard";
 

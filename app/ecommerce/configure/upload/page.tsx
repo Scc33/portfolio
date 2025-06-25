@@ -9,7 +9,6 @@ import { Progress } from "../../components/progress";
 import { useUploadThing } from "../../lib/uploadthing";
 import { cn } from "../../lib/utils";
 
-
 const Page = () => {
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
