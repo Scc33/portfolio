@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-type Player = 'X' | 'O' | null;
+type Player = "X" | "O" | null;
 
 interface Score {
   X: number;
@@ -16,8 +16,8 @@ interface TicTacToeProps {
 const TicTacToe: React.FC<TicTacToeProps> = ({ boardSize = 3 }) => {
   const WIN_CONDITION = boardSize === 5 ? 4 : boardSize; // Win condition adjusts based on board size
   const [board, setBoard] = useState<Player[][]>(createEmptyBoard(boardSize));
-  const [currentPlayer, setCurrentPlayer] = useState<Player>('X');
-  const [winner, setWinner] = useState<Player | 'Draw' | null>(null);
+  const [currentPlayer, setCurrentPlayer] = useState<Player>("X");
+  const [winner, setWinner] = useState<Player | "Draw" | null>(null);
   const [score, setScore] = useState<Score>({ X: 0, O: 0 });
   const [gameStarted, setGameStarted] = useState<boolean>(false);
 
@@ -25,12 +25,12 @@ const TicTacToe: React.FC<TicTacToeProps> = ({ boardSize = 3 }) => {
     return Array.from({ length: size }, () => Array(size).fill(null));
   }
 
-  const initializeGame = (): void => {
+  const initializeGame = React.useCallback((): void => {
     setBoard(createEmptyBoard(boardSize));
-    setCurrentPlayer('X');
+    setCurrentPlayer("X");
     setWinner(null);
     setGameStarted(true);
-  };
+  }, [boardSize]);
 
   const handleCellClick = (rowIndex: number, colIndex: number): void => {
     if (!gameStarted || winner || board[rowIndex][colIndex]) return;
@@ -49,18 +49,18 @@ const TicTacToe: React.FC<TicTacToeProps> = ({ boardSize = 3 }) => {
     const gameResult = checkWinner(newBoard);
     if (gameResult) {
       setWinner(gameResult);
-      if (gameResult === 'X' || gameResult === 'O') {
+      if (gameResult === "X" || gameResult === "O") {
         setScore((prevScore) => ({
           ...prevScore,
-          [gameResult]: prevScore[gameResult] + 1,
+          [gameResult]: prevScore[gameResult] + 1
         }));
       }
     } else {
-      setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
+      setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
     }
   };
 
-  function checkWinner(board: Player[][]): Player | 'Draw' | null {
+  function checkWinner(board: Player[][]): Player | "Draw" | null {
     // Check rows, columns, and diagonals for a win
     const lines = getAllLines(board);
 
@@ -71,7 +71,7 @@ const TicTacToe: React.FC<TicTacToeProps> = ({ boardSize = 3 }) => {
 
     // Check for Draw
     if (board.every((row) => row.every((cell) => cell !== null))) {
-      return 'Draw';
+      return "Draw";
     }
 
     return null;
@@ -114,22 +114,22 @@ const TicTacToe: React.FC<TicTacToeProps> = ({ boardSize = 3 }) => {
   function checkLineForWin(line: Player[]): Player | null {
     for (let i = 0; i <= line.length - WIN_CONDITION; i++) {
       const segment = line.slice(i, i + WIN_CONDITION);
-      if (segment.every((cell) => cell === 'X')) return 'X';
-      if (segment.every((cell) => cell === 'O')) return 'O';
+      if (segment.every((cell) => cell === "X")) return "X";
+      if (segment.every((cell) => cell === "O")) return "O";
     }
     return null;
   }
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent): void => {
-      if (event.key === ' ' || event.code === 'Space') {
+      if (event.key === " " || event.code === "Space") {
         initializeGame();
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [boardSize]);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [boardSize, initializeGame]);
 
   // Adjust styles based on board size
   const cellSize = Math.max(100 - (boardSize - 3) * 20, 60); // Decrease cell size for larger boards
@@ -145,12 +145,12 @@ const TicTacToe: React.FC<TicTacToeProps> = ({ boardSize = 3 }) => {
       )}
       {gameStarted && (
         <>
-          {winner && winner !== 'Draw' && (
+          {winner && winner !== "Draw" && (
             <div style={styles.message}>
               Player {winner} Wins! Press Space to Restart
             </div>
           )}
-          {winner === 'Draw' && (
+          {winner === "Draw" && (
             <div style={styles.message}>
               It&apos;s a Draw! Press Space to Restart
             </div>
@@ -171,9 +171,7 @@ const TicTacToe: React.FC<TicTacToeProps> = ({ boardSize = 3 }) => {
             ))}
           </div>
           {!winner && (
-            <div style={styles.message}>
-              Current Player: {currentPlayer}
-            </div>
+            <div style={styles.message}>Current Player: {currentPlayer}</div>
           )}
         </>
       )}
@@ -185,43 +183,43 @@ const TicTacToe: React.FC<TicTacToeProps> = ({ boardSize = 3 }) => {
 function getStyles(cellSize: number): { [key: string]: React.CSSProperties } {
   return {
     container: {
-      textAlign: 'center',
-      marginTop: '20px',
-      fontFamily: 'Arial, sans-serif',
+      textAlign: "center",
+      marginTop: "20px",
+      fontFamily: "Arial, sans-serif"
     },
     score: {
-      fontSize: '36px',
-      marginBottom: '20px',
-      color: '#fff', // White score color
+      fontSize: "36px",
+      marginBottom: "20px",
+      color: "#fff" // White score color
     },
     message: {
-      fontSize: '24px',
-      color: '#fff', // White message color
-      marginBottom: '10px',
+      fontSize: "24px",
+      color: "#fff", // White message color
+      marginBottom: "10px"
     },
     board: {
-      display: 'inline-block',
-      backgroundColor: '#000', // Set the board background to black
-      padding: '10px',
-      borderRadius: '10px',
+      display: "inline-block",
+      backgroundColor: "#000", // Set the board background to black
+      padding: "10px",
+      borderRadius: "10px"
     },
     row: {
-      display: 'flex',
+      display: "flex"
     },
     cell: {
       width: `${cellSize}px`,
       height: `${cellSize}px`,
-      backgroundColor: '#fff', // White cell background
-      margin: '5px',
-      borderRadius: '10px',
+      backgroundColor: "#fff", // White cell background
+      margin: "5px",
+      borderRadius: "10px",
       fontSize: `${cellSize * 0.6}px`,
-      fontWeight: 'bold',
+      fontWeight: "bold",
       lineHeight: `${cellSize}px`,
-      textAlign: 'center',
-      cursor: 'pointer',
-      userSelect: 'none',
-      color: '#000', // Black text for X and O
-    },
+      textAlign: "center",
+      cursor: "pointer",
+      userSelect: "none",
+      color: "#000" // Black text for X and O
+    }
   };
 }
 

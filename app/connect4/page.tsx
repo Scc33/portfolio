@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const ROWS = 6;
 const COLS = 7;
 
-type CellType = 'Red' | 'Yellow' | null;
-type PlayerType = 'Red' | 'Yellow';
+type CellType = "Red" | "Yellow" | null;
+type PlayerType = "Red" | "Yellow";
 
 const Connect4Game: React.FC = () => {
   const initializeBoard = () => {
@@ -16,33 +16,29 @@ const Connect4Game: React.FC = () => {
   };
 
   const [board, setBoard] = useState<CellType[][]>(initializeBoard());
-  const [currentPlayer, setCurrentPlayer] = useState<PlayerType>('Red');
+  const [currentPlayer, setCurrentPlayer] = useState<PlayerType>("Red");
   const [gameActive, setGameActive] = useState<boolean>(false);
-  const [winner, setWinner] = useState<PlayerType | 'Draw' | null>(null);
+  const [winner, setWinner] = useState<PlayerType | "Draw" | null>(null);
   const [score, setScore] = useState<{ Red: number; Yellow: number }>({
     Red: 0,
-    Yellow: 0,
+    Yellow: 0
   });
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.code === 'Space') {
-        startGame();
+      if (e.code === "Space") {
+        setBoard(initializeBoard());
+        setCurrentPlayer("Red");
+        setGameActive(true);
+        setWinner(null);
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
-
-  const startGame = () => {
-    setBoard(initializeBoard());
-    setCurrentPlayer('Red');
-    setGameActive(true);
-    setWinner(null);
-  };
+  }, [setBoard, setCurrentPlayer, setGameActive, setWinner]);
 
   const handleClick = (colIndex: number) => {
     if (!gameActive || winner) return;
@@ -58,13 +54,13 @@ const Connect4Game: React.FC = () => {
           setGameActive(false);
           setScore((prevScore) => ({
             ...prevScore,
-            [currentPlayer]: prevScore[currentPlayer] + 1,
+            [currentPlayer]: prevScore[currentPlayer] + 1
           }));
         } else if (isBoardFull(newBoard)) {
-          setWinner('Draw');
+          setWinner("Draw");
           setGameActive(false);
         } else {
-          setCurrentPlayer(currentPlayer === 'Red' ? 'Yellow' : 'Red');
+          setCurrentPlayer(currentPlayer === "Red" ? "Yellow" : "Red");
         }
 
         break;
@@ -109,13 +105,7 @@ const Connect4Game: React.FC = () => {
     let count = 0;
     let r = row + rowDir;
     let c = col + colDir;
-    while (
-      r >= 0 &&
-      r < ROWS &&
-      c >= 0 &&
-      c < COLS &&
-      board[r][c] === player
-    ) {
+    while (r >= 0 && r < ROWS && c >= 0 && c < COLS && board[r][c] === player) {
       count++;
       r += rowDir;
       c += colDir;
@@ -140,7 +130,7 @@ const Connect4Game: React.FC = () => {
                 <div
                   style={{
                     ...styles.disc,
-                    backgroundColor: cell ? cell.toLowerCase() : 'white',
+                    backgroundColor: cell ? cell.toLowerCase() : "white"
                   }}
                 />
               </div>
@@ -155,10 +145,10 @@ const Connect4Game: React.FC = () => {
         {gameActive && !winner && (
           <p style={styles.turn}>{currentPlayer}&apos;s Turn</p>
         )}
-        {winner && winner !== 'Draw' && (
+        {winner && winner !== "Draw" && (
           <p style={styles.winner}>{winner} Wins!</p>
         )}
-        {winner === 'Draw' && <p style={styles.winner}>It&apos;s a Draw!</p>}
+        {winner === "Draw" && <p style={styles.winner}>It&apos;s a Draw!</p>}
       </div>
     </div>
   );
@@ -166,57 +156,57 @@ const Connect4Game: React.FC = () => {
 
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
-    backgroundColor: 'black',
-    color: 'white',
-    display: 'flex',
-    flexDirection: 'column' as const,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "black",
+    color: "white",
+    display: "flex",
+    flexDirection: "column" as const,
+    alignItems: "center",
+    justifyContent: "center"
   },
   score: {
-    textAlign: 'center' as const,
-    marginBottom: '20px',
+    textAlign: "center" as const,
+    marginBottom: "20px"
   },
   board: {
-    display: 'flex',
-    flexDirection: 'column' as const,
-    backgroundColor: 'blue',
-    padding: '10px',
-    borderRadius: '10px',
+    display: "flex",
+    flexDirection: "column" as const,
+    backgroundColor: "blue",
+    padding: "10px",
+    borderRadius: "10px"
   },
   row: {
-    display: 'flex',
+    display: "flex"
   },
   cell: {
-    width: '80px',
-    height: '80px',
-    margin: '5px',
-    backgroundColor: 'darkblue',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: 'pointer',
-    borderRadius: '50%',
+    width: "80px",
+    height: "80px",
+    margin: "5px",
+    backgroundColor: "darkblue",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    borderRadius: "50%"
   },
   disc: {
-    width: '70px',
-    height: '70px',
-    borderRadius: '50%',
-    backgroundColor: 'white',
+    width: "70px",
+    height: "70px",
+    borderRadius: "50%",
+    backgroundColor: "white"
   },
   message: {
-    marginTop: '20px',
+    marginTop: "20px"
   },
   instruction: {
-    fontSize: '24px',
+    fontSize: "24px"
   },
   turn: {
-    fontSize: '24px',
+    fontSize: "24px"
   },
   winner: {
-    fontSize: '32px',
-    fontWeight: 'bold' as const,
-  },
+    fontSize: "32px",
+    fontWeight: "bold" as const
+  }
 };
 
 export default Connect4Game;

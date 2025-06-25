@@ -4,209 +4,204 @@ import React, { useState, useEffect } from "react";
 type Direction = { x: number; y: number };
 type Coordinate = { x: number; y: number };
 
-export default function SnakeGame(): JSX.Element {
-    const gridSize = 30;
-    const [gameState, setGameState] = useState<"idle" | "running" | "over">(
-        "idle"
-    );
-    const [direction, setDirection] = useState<Direction>({ x: 0, y: 0 });
-    const [snake, setSnake] = useState<Coordinate[]>([]);
-    const [food, setFood] = useState<Coordinate | null>(null);
+export default function SnakeGame() {
+  const gridSize = 30;
+  const [gameState, setGameState] = useState<"idle" | "running" | "over">(
+    "idle"
+  );
+  const [direction, setDirection] = useState<Direction>({ x: 0, y: 0 });
+  const [snake, setSnake] = useState<Coordinate[]>([]);
+  const [food, setFood] = useState<Coordinate | null>(null);
 
-    function startGame(): void {
-        setGameState("running");
-        // Initialize the snake in the center
-        const initialSnake: Coordinate[] = [
-            { x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2) }
-        ];
-        setSnake(initialSnake);
-        // Random initial direction (up, left, or down)
-        const directions: Direction[] = [
-            { x: 0, y: -1 }, // Up
-            { x: -1, y: 0 }, // Left
-            { x: 0, y: 1 }, // Down
-            { x: 1, y: 0 } // Right
-        ];
-        const randomDirection =
-            directions[Math.floor(Math.random() * directions.length)];
-        setDirection(randomDirection);
-        // Place the first food
-        placeFood(initialSnake);
+  const startGame = React.useCallback((): void => {
+    setGameState("running");
+    // Initialize the snake in the center
+    const initialSnake: Coordinate[] = [
+      { x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2) }
+    ];
+    setSnake(initialSnake);
+    // Random initial direction (up, left, or down)
+    const directions: Direction[] = [
+      { x: 0, y: -1 }, // Up
+      { x: -1, y: 0 }, // Left
+      { x: 0, y: 1 }, // Down
+      { x: 1, y: 0 } // Right
+    ];
+    const randomDirection =
+      directions[Math.floor(Math.random() * directions.length)];
+    setDirection(randomDirection);
+    // Place the first food
+    placeFood(initialSnake);
+  }, []);
+
+  function placeFood(snake: Coordinate[]): void {
+    let newFood: Coordinate;
+    while (true) {
+      newFood = {
+        x: Math.floor(Math.random() * gridSize),
+        y: Math.floor(Math.random() * gridSize)
+      };
+      // Ensure food doesn't appear on the snake
+      if (
+        !snake.some(
+          (segment) => segment.x === newFood.x && segment.y === newFood.y
+        )
+      ) {
+        break;
+      }
+    }
+    setFood(newFood);
+  }
+
+  const moveSnake = React.useCallback((): void => {
+    const newHead: Coordinate = {
+      x: snake[0].x + direction.x,
+      y: snake[0].y + direction.y
+    };
+
+    // Check for wall collisions
+    if (
+      newHead.x < 0 ||
+      newHead.x >= gridSize ||
+      newHead.y < 0 ||
+      newHead.y >= gridSize
+    ) {
+      setGameState("over");
+      return;
     }
 
-    function placeFood(snake: Coordinate[]): void {
-        let newFood: Coordinate;
-        while (true) {
-            newFood = {
-                x: Math.floor(Math.random() * gridSize),
-                y: Math.floor(Math.random() * gridSize)
-            };
-            // Ensure food doesn't appear on the snake
-            if (
-                !snake.some(
-                    (segment) =>
-                        segment.x === newFood.x && segment.y === newFood.y
-                )
-            ) {
-                break;
-            }
-        }
-        setFood(newFood);
+    // Check for self-collisions
+    if (
+      snake.some(
+        (segment) => segment.x === newHead.x && segment.y === newHead.y
+      )
+    ) {
+      setGameState("over");
+      return;
     }
 
-    function moveSnake(): void {
-        const newHead: Coordinate = {
-            x: snake[0].x + direction.x,
-            y: snake[0].y + direction.y
-        };
+    const newSnake = [newHead, ...snake];
 
-        // Check for wall collisions
-        if (
-            newHead.x < 0 ||
-            newHead.x >= gridSize ||
-            newHead.y < 0 ||
-            newHead.y >= gridSize
-        ) {
-            setGameState("over");
-            return;
-        }
-
-        // Check for self-collisions
-        if (
-            snake.some(
-                (segment) => segment.x === newHead.x && segment.y === newHead.y
-            )
-        ) {
-            setGameState("over");
-            return;
-        }
-
-        let newSnake = [newHead, ...snake];
-
-        // Check if food is eaten
-        if (food && newHead.x === food.x && newHead.y === food.y) {
-            placeFood(newSnake);
-        } else {
-            newSnake.pop();
-        }
-
-        setSnake(newSnake);
+    // Check if food is eaten
+    if (food && newHead.x === food.x && newHead.y === food.y) {
+      placeFood(newSnake);
+    } else {
+      newSnake.pop();
     }
 
-    useEffect(() => {
-        if (gameState === "running") {
-            const intervalId = setInterval(() => {
-                moveSnake();
-            }, 100); // Adjust speed here
-            return () => clearInterval(intervalId);
+    setSnake(newSnake);
+  }, [snake, direction, food, gridSize]);
+
+  useEffect(() => {
+    if (gameState === "running") {
+      const intervalId = setInterval(() => {
+        moveSnake();
+      }, 100); // Adjust speed here
+      return () => clearInterval(intervalId);
+    }
+  }, [gameState, snake, direction, moveSnake]);
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent): void {
+      if (event.code === "Space") {
+        if (gameState !== "running") {
+          startGame();
         }
-    }, [gameState, snake, direction]);
-
-    useEffect(() => {
-        function handleKeyDown(event: KeyboardEvent): void {
-            if (event.code === "Space") {
-                if (gameState !== "running") {
-                    startGame();
-                }
-            } else if (gameState === "running") {
-                switch (event.key.toLowerCase()) {
-                    case "w":
-                        if (direction.y !== 1) setDirection({ x: 0, y: -1 });
-                        break;
-                    case "a":
-                        if (direction.x !== 1) setDirection({ x: -1, y: 0 });
-                        break;
-                    case "s":
-                        if (direction.y !== -1) setDirection({ x: 0, y: 1 });
-                        break;
-                    case "d":
-                        if (direction.x !== -1) setDirection({ x: 1, y: 0 });
-                        break;
-                    default:
-                        break;
-                }
-            }
+      } else if (gameState === "running") {
+        switch (event.key.toLowerCase()) {
+          case "w":
+            if (direction.y !== 1) setDirection({ x: 0, y: -1 });
+            break;
+          case "a":
+            if (direction.x !== 1) setDirection({ x: -1, y: 0 });
+            break;
+          case "s":
+            if (direction.y !== -1) setDirection({ x: 0, y: 1 });
+            break;
+          case "d":
+            if (direction.x !== -1) setDirection({ x: 1, y: 0 });
+            break;
+          default:
+            break;
         }
+      }
+    }
 
-        window.addEventListener("keydown", handleKeyDown);
-        return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [gameState, direction]);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [gameState, direction, startGame]);
 
-    return (
-        <>
-            <div className="game-container">
-                <div className="grid">
-                    {Array.from({ length: gridSize }).map((_, row) => (
-                        <div key={row} className="row">
-                            {Array.from({ length: gridSize }).map((_, col) => {
-                                const isSnake = snake.some(
-                                    (segment) =>
-                                        segment.x === col && segment.y === row
-                                );
-                                const isFood =
-                                    food && food.x === col && food.y === row;
-                                return (
-                                    <div
-                                        key={col}
-                                        className={`cell ${isSnake ? "snake" : ""} ${isFood ? "food" : ""}`}
-                                    ></div>
-                                );
-                            })}
-                        </div>
-                    ))}
-                </div>
-                {gameState === "idle" && (
-                    <div className="overlay">Press Space to Start</div>
-                )}
-                {gameState === "over" && (
-                    <div className="overlay">
-                        Game Over! Press Space to Restart
-                    </div>
-                )}
+  return (
+    <>
+      <div className="game-container">
+        <div className="grid">
+          {Array.from({ length: gridSize }).map((_, row) => (
+            <div key={row} className="row">
+              {Array.from({ length: gridSize }).map((_, col) => {
+                const isSnake = snake.some(
+                  (segment) => segment.x === col && segment.y === row
+                );
+                const isFood = food && food.x === col && food.y === row;
+                return (
+                  <div
+                    key={col}
+                    className={`cell ${isSnake ? "snake" : ""} ${isFood ? "food" : ""}`}
+                  ></div>
+                );
+              })}
             </div>
-            <style jsx>{`
-                .game-container {
-                    position: relative;
-                    width: 600px;
-                    height: 600px;
-                    margin: 20px auto;
-                    background: #000;
-                    border: 2px solid #fff;
-                }
-                .grid {
-                    display: grid;
-                    grid-template-rows: repeat(${gridSize}, 1fr);
-                    grid-template-columns: repeat(${gridSize}, 1fr);
-                    width: 100%;
-                    height: 100%;
-                }
-                .cell {
-                    width: 100%;
-                    height: 100%;
-                    box-sizing: border-box;
-                }
-                .cell:not(.snake):not(.food) {
-                    background: #111;
-                }
-                .snake {
-                    background: #7cfc00;
-                }
-                .food {
-                    background: #ff4500;
-                }
-                .overlay {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    color: #fff;
-                    font-size: 2em;
-                    text-align: center;
-                }
-                .row {
-                    display: contents;
-                }
-            `}</style>
-        </>
-    );
+          ))}
+        </div>
+        {gameState === "idle" && (
+          <div className="overlay">Press Space to Start</div>
+        )}
+        {gameState === "over" && (
+          <div className="overlay">Game Over! Press Space to Restart</div>
+        )}
+      </div>
+      <style jsx>{`
+        .game-container {
+          position: relative;
+          width: 600px;
+          height: 600px;
+          margin: 20px auto;
+          background: #000;
+          border: 2px solid #fff;
+        }
+        .grid {
+          display: grid;
+          grid-template-rows: repeat(${gridSize}, 1fr);
+          grid-template-columns: repeat(${gridSize}, 1fr);
+          width: 100%;
+          height: 100%;
+        }
+        .cell {
+          width: 100%;
+          height: 100%;
+          box-sizing: border-box;
+        }
+        .cell:not(.snake):not(.food) {
+          background: #111;
+        }
+        .snake {
+          background: #7cfc00;
+        }
+        .food {
+          background: #ff4500;
+        }
+        .overlay {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: #fff;
+          font-size: 2em;
+          text-align: center;
+        }
+        .row {
+          display: contents;
+        }
+      `}</style>
+    </>
+  );
 }

@@ -2,6 +2,6 @@
 
 import TicTacToe from "../tictactoe";
 
-export default function TicTacToe3(): JSX.Element {
-    return (<TicTacToe boardSize={4} />);
+export default function TicTacToe3() {
+  return <TicTacToe boardSize={4} />;
 }
