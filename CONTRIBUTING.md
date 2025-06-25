@@ -3,17 +3,20 @@
 ## Development Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone <your-repo-url>
    cd portfolio
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env.local
    ```
@@ -36,4 +39,4 @@
 2. Make your changes
 3. Run quality checks: `npm run quality`
 4. Submit a pull request with the provided template
-5. Ensure all CI checks pass 
+5. Ensure all CI checks pass
