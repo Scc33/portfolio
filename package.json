@@ -11,7 +11,14 @@
     "lint": "next lint",
     "prettier": "prettier --write **/*.{ts,tsx}",
     "prettier:check": "prettier --check **/*.{ts,tsx}",
-    "cspell": "cspell **/*"
+    "cspell": "cspell **/*",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "spell-check": "cspell **/*",
+    "quality": "npm run type-check && npm run lint && npm run format:check && npm run spell-check",
+    "prepare": "husky install"
   },
   "type": "module",
   "dependencies": {
@@ -48,6 +55,17 @@
     "eslint-config-next": "^15.3.4",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.5.1",
-    "prettier": "^3.6.1"
+    "prettier": "^3.6.1",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^9.0.0",
+    "lint-staged": "^15.2.0",
+    "commitlint": "^18.0.0",
+    "@commitlint/cli": "^18.0.0",
+    "@commitlint/config-conventional": "^18.0.0"
   }
 }
