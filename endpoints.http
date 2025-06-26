@@ -1,8 +1,0 @@
-### Healthcheck
-http://localhost:3000/api
-
-### Hello work endpoint
-http://localhost:3000/api/hello
-
-### For sending cookies
-http://localhost:3000/api/cookies

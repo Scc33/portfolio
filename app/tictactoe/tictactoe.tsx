@@ -159,13 +159,21 @@ const TicTacToe: React.FC<TicTacToeProps> = ({ boardSize = 3 }) => {
             {board.map((row, rowIndex) => (
               <div key={rowIndex} style={styles.row}>
                 {row.map((cell, colIndex) => (
-                  <div
+                  <button
                     key={colIndex}
                     style={styles.cell}
                     onClick={() => handleCellClick(rowIndex, colIndex)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        handleCellClick(rowIndex, colIndex);
+                      }
+                    }}
+                    disabled={!gameStarted || !!winner || !!cell}
+                    aria-label={`Cell ${rowIndex + 1}, ${colIndex + 1}${cell ? ` - ${cell}` : ""}`}
                   >
                     {cell}
-                  </div>
+                  </button>
                 ))}
               </div>
             ))}
@@ -218,7 +226,10 @@ function getStyles(cellSize: number): { [key: string]: React.CSSProperties } {
       textAlign: "center",
       cursor: "pointer",
       userSelect: "none",
-      color: "#000" // Black text for X and O
+      color: "#000", // Black text for X and O
+      border: "none",
+      outline: "none",
+      transition: "all 0.2s ease"
     }
   };
 }

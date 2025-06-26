@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { cn } from "../../lib/utils";
-import Dropzone from "react-dropzone";
 import { Image, Loader2, MousePointerSquareDashed } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
+import Dropzone from "react-dropzone";
+
 import { Progress } from "../../components/progress";
 import { useUploadThing } from "../../lib/uploadthing";
-import { useRouter } from "next/navigation";
+import { cn } from "../../lib/utils";
 
 const Page = () => {
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
