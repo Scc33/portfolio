@@ -1,10 +1,11 @@
-import Image from "next/image";
-import MaxWidthWrapper from "./components/MaxWidthWrapper";
 import { ArrowRight, Check, Star } from "lucide-react";
-import Phone from "./components/Phone";
-import { Icons } from "./components/Icons";
-import Reviews from "./components/Reviews";
+import Image from "next/image";
 import Link from "next/link";
+
+import { Icons } from "./components/Icons";
+import MaxWidthWrapper from "./components/MaxWidthWrapper";
+import Phone from "./components/Phone";
+import Reviews from "./components/Reviews";
 import { buttonVariants } from "./components/button";
 
 export default function Page() {

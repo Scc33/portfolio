@@ -21,8 +21,11 @@ const MortgageCalc = () => {
         Mortgage Calculator
       </h2>
       <div className="mb-4">
-        <label className="block text-gray-300">Loan Amount</label>
+        <label htmlFor="loanAmount" className="block text-gray-300">
+          Loan Amount
+        </label>
         <input
+          id="loanAmount"
           type="number"
           className="w-full px-3 py-2 border rounded-lg bg-gray-700 text-white"
           value={loanAmount}
@@ -30,8 +33,11 @@ const MortgageCalc = () => {
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-300">Interest Rate (%)</label>
+        <label htmlFor="interestRate" className="block text-gray-300">
+          Interest Rate (%)
+        </label>
         <input
+          id="interestRate"
           type="number"
           className="w-full px-3 py-2 border rounded-lg bg-gray-700 text-white"
           value={interestRate}
@@ -39,8 +45,11 @@ const MortgageCalc = () => {
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-300">Loan Term (years)</label>
+        <label htmlFor="loanTerm" className="block text-gray-300">
+          Loan Term (years)
+        </label>
         <input
+          id="loanTerm"
           type="number"
           className="w-full px-3 py-2 border rounded-lg bg-gray-700 text-white"
           value={loanTerm}

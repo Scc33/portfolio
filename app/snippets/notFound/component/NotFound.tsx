@@ -1,5 +1,6 @@
-import { Button } from "../../button/components/Button";
 import Link from "next/link";
+
+import { Button } from "../../button/components/Button";
 
 const NotFound = () => {
   return (

@@ -1,6 +1,8 @@
 import Link from "next/link";
-import MaxWidthWrapper from "./MaxWidthWrapper";
+
 import GlobalFooter from "../../components/Footer";
+
+import MaxWidthWrapper from "./MaxWidthWrapper";
 
 const Footer = () => {
   return (

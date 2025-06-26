@@ -132,76 +132,47 @@ export default function SnakeGame() {
   }, [gameState, direction, startGame]);
 
   return (
-    <>
-      <div className="game-container">
-        <div className="grid">
-          {Array.from({ length: gridSize }).map((_, row) => (
-            <div key={row} className="row">
-              {Array.from({ length: gridSize }).map((_, col) => {
-                const isSnake = snake.some(
-                  (segment) => segment.x === col && segment.y === row
-                );
-                const isFood = food && food.x === col && food.y === row;
-                return (
-                  <div
-                    key={col}
-                    className={`cell ${isSnake ? "snake" : ""} ${isFood ? "food" : ""}`}
-                  ></div>
-                );
-              })}
-            </div>
-          ))}
-        </div>
-        {gameState === "idle" && (
-          <div className="overlay">Press Space to Start</div>
-        )}
-        {gameState === "over" && (
-          <div className="overlay">Game Over! Press Space to Restart</div>
-        )}
+    <div className="relative w-[600px] h-[600px] mx-auto my-5 bg-black border-2 border-white">
+      <div
+        className="grid w-full h-full"
+        style={{
+          gridTemplateRows: `repeat(${gridSize}, 1fr)`,
+          gridTemplateColumns: `repeat(${gridSize}, 1fr)`
+        }}
+      >
+        {Array.from({ length: gridSize }).map((_, row) => (
+          <div key={row} className="contents">
+            {Array.from({ length: gridSize }).map((_, col) => {
+              const isSnake = snake.some(
+                (segment) => segment.x === col && segment.y === row
+              );
+              const isFood = food && food.x === col && food.y === row;
+              return (
+                <div
+                  key={col}
+                  className={`w-full h-full box-border ${
+                    isSnake
+                      ? "bg-green-400"
+                      : isFood
+                        ? "bg-orange-500"
+                        : "bg-gray-900"
+                  }`}
+                ></div>
+              );
+            })}
+          </div>
+        ))}
       </div>
-      <style jsx>{`
-        .game-container {
-          position: relative;
-          width: 600px;
-          height: 600px;
-          margin: 20px auto;
-          background: #000;
-          border: 2px solid #fff;
-        }
-        .grid {
-          display: grid;
-          grid-template-rows: repeat(${gridSize}, 1fr);
-          grid-template-columns: repeat(${gridSize}, 1fr);
-          width: 100%;
-          height: 100%;
-        }
-        .cell {
-          width: 100%;
-          height: 100%;
-          box-sizing: border-box;
-        }
-        .cell:not(.snake):not(.food) {
-          background: #111;
-        }
-        .snake {
-          background: #7cfc00;
-        }
-        .food {
-          background: #ff4500;
-        }
-        .overlay {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          color: #fff;
-          font-size: 2em;
-          text-align: center;
-        }
-        .row {
-          display: contents;
-        }
-      `}</style>
-    </>
+      {gameState === "idle" && (
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl text-center">
+          Press Space to Start
+        </div>
+      )}
+      {gameState === "over" && (
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl text-center">
+          Game Over! Press Space to Restart
+        </div>
+      )}
+    </div>
   );
 }

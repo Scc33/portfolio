@@ -1,5 +1,6 @@
-import { PAGE_METADATA, PageMetadata } from "../../data/Pages";
 import Link from "next/link";
+
+import { PAGE_METADATA, PageMetadata } from "../../data/Pages";
 
 export function PortfolioPieces() {
   return (

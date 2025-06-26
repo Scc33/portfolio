@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Github, Linkedin, Instagram, Twitter } from "lucide-react";
 
-export const PortfolioCard = () => {
+const PortfolioCard = () => {
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 max-w-[343px] md:max-w-[384px] lg:max-w-[384px] mx-auto">
       <div className="flex flex-col items-center">

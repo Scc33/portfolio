@@ -1,6 +1,7 @@
 "use client";
 
 import { Fragment } from "react";
+
 import Project from "./Project";
 
 export const projectsData = [

@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
 import { Eye, EyeOff } from "lucide-react";
+import React from "react";
 
 interface TextInputProps {
   label: string;
