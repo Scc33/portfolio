@@ -32,6 +32,13 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          KINDE_ISSUER_URL: https://placeholder.kinde.com
+          KINDE_CLIENT_ID: placeholder_client_id
+          KINDE_CLIENT_SECRET: placeholder_client_secret
+          KINDE_REDIRECT_URI: http://localhost:3000/api/auth/kinde_callback
+          KINDE_LOGOUT_REDIRECT_URI: http://localhost:3000
+          ADMIN_EMAIL: admin@example.com
 
   security:
     runs-on: ubuntu-latest
