@@ -6,6 +6,15 @@ import Project from "./Project";
 
 export const projectsData = [
   {
+    title: "Trip Countdown",
+    description:
+      "A countdown app that lets people track their upcoming exciting events with shareable URLs using query parameters.",
+    tags: ["NextJS", "React", "TypeScript", "Query Params"],
+    imageUrl: "/counter/counter-screenshot.png",
+    link: "https://counter.seancoughlin.me",
+    date: "Summer 2025"
+  },
+  {
     title: "Perplexity Clone",
     description:
       "A clone of the popular search engine Perplexity built with React and TypeScript.",
