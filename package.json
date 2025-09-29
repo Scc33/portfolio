@@ -48,7 +48,7 @@
     "zod": "^3.25.67"
   },
   "devDependencies": {
-    "@commitlint/cli": "^18.0.0",
+    "@commitlint/cli": "^20.0.0",
     "@commitlint/config-conventional": "^18.0.0",
     "@types/prismjs": "^1.26.5",
     "@typescript-eslint/eslint-plugin": "^8.35.0",
